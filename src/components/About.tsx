@@ -15,48 +15,48 @@ const coreValues = [
   {
     icon: Target,
     title: "Excellence",
-    description: "Outperforming expectations in all that we do and going above and beyond."
+    description: "Outperforming expectations in all that we do."
   },
   {
     icon: Shield,
     title: "Integrity",
-    description: "Ethics and responsibility in how we align our values and actions."
+    description: "Ethics and responsibility in all our actions."
   },
   {
     icon: Users,
     title: "Teamwork",
-    description: "Exceptional people working together throughout our family of companies."
+    description: "Exceptional people working together."
   },
   {
     icon: Zap,
     title: "Empowerment",
-    description: "Making individual choices that advance our purpose, vision, and values."
+    description: "Making choices that advance our vision."
   },
 ];
 
 const About = () => {
   return (
-    <section id="about" className="py-24 bg-background">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <section id="about" className="section-padding bg-background">
+      <div className="container mx-auto container-padding">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Content */}
           <div>
-            <span className="text-secondary font-medium uppercase tracking-widest text-sm">About Us</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-6 text-foreground">
+            <span className="inline-block text-secondary font-semibold uppercase tracking-widest text-xs md:text-sm mb-3">About Us</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-foreground">
               Building <span className="text-gradient-brand">Dreams</span> Into Reality
             </h2>
-            <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
+            <p className="text-muted-foreground text-sm md:text-base lg:text-lg mb-6 md:mb-8 leading-relaxed">
               Light Way Homes Ltd is a leading real estate advisory and developmental company 
               dedicated to transforming the Nigerian real estate landscape. We create premium 
               estates that combine luxury, comfort, and investment value.
             </p>
 
             {/* Features */}
-            <div className="grid sm:grid-cols-2 gap-4 mb-8">
+            <div className="grid sm:grid-cols-2 gap-3 mb-6 md:mb-8">
               {features.map((feature, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground/80 text-sm">{feature}</span>
+                <div key={index} className="flex items-start gap-2.5">
+                  <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <span className="text-foreground/80 text-xs md:text-sm">{feature}</span>
                 </div>
               ))}
             </div>
@@ -69,62 +69,61 @@ const About = () => {
 
           {/* Visual - Core Values */}
           <div className="relative">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
               {coreValues.map((value, index) => (
                 <div 
                   key={value.title}
-                  className={`bg-card rounded-2xl p-6 border border-border shadow-card hover:shadow-elevated transition-all duration-300 ${
-                    index % 2 === 1 ? 'mt-8' : ''
+                  className={`bg-card rounded-xl p-4 md:p-5 border border-border shadow-card card-hover ${
+                    index % 2 === 1 ? 'mt-6 md:mt-8' : ''
                   }`}
-                  style={{ animation: `float 6s ease-in-out infinite ${index * 0.5}s` }}
                 >
-                  <div className="w-12 h-12 bg-gradient-brand rounded-lg flex items-center justify-center mb-4">
-                    <value.icon className="w-6 h-6 text-primary-foreground" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-brand rounded-lg flex items-center justify-center mb-3 md:mb-4">
+                    <value.icon className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">{value.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
+                  <h3 className="text-base md:text-lg font-bold text-foreground mb-1.5 md:mb-2">{value.title}</h3>
+                  <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">{value.description}</p>
                 </div>
               ))}
             </div>
 
             {/* Decorative */}
-            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-brand opacity-10 rounded-full blur-3xl" />
+            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 md:w-96 h-72 md:h-96 bg-gradient-brand opacity-5 rounded-full blur-3xl" />
           </div>
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-12 border-t border-border">
-          <div className="text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-14 md:mt-20 pt-10 md:pt-12 border-t border-border">
+          <div className="text-center p-4 md:p-6 bg-card rounded-xl border border-border">
             <CountUpNumber 
               end={500} 
               suffix="+" 
-              className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2" 
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient-brand mb-1" 
             />
-            <div className="text-muted-foreground">Happy Homeowners</div>
+            <div className="text-muted-foreground text-xs md:text-sm">Happy Homeowners</div>
           </div>
-          <div className="text-center">
+          <div className="text-center p-4 md:p-6 bg-card rounded-xl border border-border">
             <CountUpNumber 
               end={5} 
               suffix="+" 
-              className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2" 
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient-brand mb-1" 
             />
-            <div className="text-muted-foreground">Years of Excellence</div>
+            <div className="text-muted-foreground text-xs md:text-sm">Years of Excellence</div>
           </div>
-          <div className="text-center">
+          <div className="text-center p-4 md:p-6 bg-card rounded-xl border border-border">
             <CountUpNumber 
               end={10} 
               suffix="+" 
-              className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2" 
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient-brand mb-1" 
             />
-            <div className="text-muted-foreground">Premium Estates</div>
+            <div className="text-muted-foreground text-xs md:text-sm">Premium Estates</div>
           </div>
-          <div className="text-center">
+          <div className="text-center p-4 md:p-6 bg-card rounded-xl border border-border">
             <CountUpNumber 
               end={99} 
               suffix="%" 
-              className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2" 
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient-brand mb-1" 
             />
-            <div className="text-muted-foreground">Client Satisfaction</div>
+            <div className="text-muted-foreground text-xs md:text-sm">Client Satisfaction</div>
           </div>
         </div>
       </div>
