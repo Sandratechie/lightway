@@ -1,5 +1,6 @@
 import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import CountUpNumber from "@/components/CountUpNumber";
 import heroImage from "@/assets/hero-estate.jpg";
 
 const Hero = () => {
@@ -53,15 +54,27 @@ const Hero = () => {
           {/* Trust Indicators */}
           <div className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-primary-foreground/20 animate-fade-up" style={{ animationDelay: "0.4s" }}>
             <div>
-              <div className="text-3xl font-bold text-secondary">5+</div>
+              <CountUpNumber 
+                end={5} 
+                suffix="+" 
+                className="text-3xl font-bold text-secondary" 
+              />
               <div className="text-sm text-primary-foreground/70">Years Experience</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-secondary">500+</div>
+              <CountUpNumber 
+                end={500} 
+                suffix="+" 
+                className="text-3xl font-bold text-secondary" 
+              />
               <div className="text-sm text-primary-foreground/70">Happy Clients</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-secondary">10+</div>
+              <CountUpNumber 
+                end={10} 
+                suffix="+" 
+                className="text-3xl font-bold text-secondary" 
+              />
               <div className="text-sm text-primary-foreground/70">Estate Projects</div>
             </div>
           </div>

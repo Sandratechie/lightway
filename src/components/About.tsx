@@ -1,5 +1,6 @@
 import { CheckCircle, ArrowRight, Target, Shield, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import CountUpNumber from "@/components/CountUpNumber";
 
 const features = [
   "Premium estate developments with modern architecture",
@@ -94,19 +95,35 @@ const About = () => {
         {/* Stats Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-12 border-t border-border">
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2">500+</div>
+            <CountUpNumber 
+              end={500} 
+              suffix="+" 
+              className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2" 
+            />
             <div className="text-muted-foreground">Happy Homeowners</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2">5+</div>
+            <CountUpNumber 
+              end={5} 
+              suffix="+" 
+              className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2" 
+            />
             <div className="text-muted-foreground">Years of Excellence</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2">10+</div>
+            <CountUpNumber 
+              end={10} 
+              suffix="+" 
+              className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2" 
+            />
             <div className="text-muted-foreground">Premium Estates</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2">99%</div>
+            <CountUpNumber 
+              end={99} 
+              suffix="%" 
+              className="text-4xl md:text-5xl font-bold text-gradient-brand mb-2" 
+            />
             <div className="text-muted-foreground">Client Satisfaction</div>
           </div>
         </div>
