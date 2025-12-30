@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,18 +14,16 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-b border-border/50">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-gold-light flex items-center justify-center">
-              <span className="font-display font-bold text-primary-foreground text-lg">L</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display font-bold text-foreground text-lg leading-tight">Lightway</span>
-              <span className="text-xs text-muted-foreground tracking-wider">HOMES LTD</span>
-            </div>
+          <a href="#" className="flex items-center">
+            <img 
+              src={logo} 
+              alt="Light Way Homes" 
+              className="h-14 w-auto"
+            />
           </a>
 
           {/* Desktop Navigation */}
@@ -43,11 +42,11 @@ const Header = () => {
           {/* CTA & Phone */}
           <div className="hidden lg:flex items-center gap-4">
             <a 
-              href="tel:+2348075161213" 
+              href="tel:+2348038034077" 
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               <Phone className="w-4 h-4" />
-              <span className="text-sm">+234 807 516 1213</span>
+              <span className="text-sm">+234 803 803 4077</span>
             </a>
             <Button variant="hero" size="lg">
               Get Started
@@ -79,11 +78,11 @@ const Header = () => {
               </a>
             ))}
             <a 
-              href="tel:+2348075161213" 
+              href="tel:+2348038034077" 
               className="flex items-center gap-2 text-muted-foreground py-2"
             >
               <Phone className="w-4 h-4" />
-              <span>+234 807 516 1213</span>
+              <span>+234 803 803 4077</span>
             </a>
             <Button variant="hero" size="lg" className="mt-2">
               Get Started
