@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CountUpNumber from "@/components/CountUpNumber";
 
@@ -159,18 +159,17 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4 animate-fade-up" 
             style={{ animationDelay: "0.3s" }}
           >
-            <Button variant="hero" size="lg" className="group">
+            <Button variant="hero" size="lg" className="group shadow-lg shadow-secondary/30">
               View Our Estates
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button 
-              variant="heroOutline" 
-              size="lg" 
-              className="group border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary backdrop-blur-sm"
+            <a 
+              href="tel:+2348038034077"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 backdrop-blur-sm transition-all duration-300 font-semibold group"
             >
-              <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              Watch Video
-            </Button>
+              <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              Call Us Now
+            </a>
           </div>
 
           {/* Trust Indicators */}
