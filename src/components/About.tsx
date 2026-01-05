@@ -1,7 +1,10 @@
-import { CheckCircle, ArrowRight, Target, Shield, Users, Zap } from "lucide-react";
+import { CheckCircle, ArrowRight, Target, Shield, Users, Zap, Lightbulb, Heart, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CountUpNumber from "@/components/CountUpNumber";
 import AnimatedSection from "@/components/AnimatedSection";
+import funmilayoImg from "@/assets/team/funmilayo-adesanya.jpg";
+import olumideImg from "@/assets/team/olumide-olujuyigbe.jpg";
+import agboolaImg from "@/assets/team/agboola-osunbanjo.jpg";
 
 const features = [
   "Premium estate developments with modern architecture",
@@ -16,22 +19,64 @@ const coreValues = [
   {
     icon: Target,
     title: "Excellence",
-    description: "Outperforming expectations in all that we do."
-  },
-  {
-    icon: Shield,
-    title: "Integrity",
-    description: "Ethics and responsibility in all our actions."
+    description: "We are practicing and providing competent, quality, and efficient services with a skilled team on board."
   },
   {
     icon: Users,
     title: "Teamwork",
-    description: "Exceptional people working together."
+    description: "We embrace a collaborative effort to achieve our ultimate goal which is making our clients' home dreams a reality."
+  },
+  {
+    icon: Heart,
+    title: "Customer Focus",
+    description: "We place premium value on customer satisfaction."
+  },
+  {
+    icon: Lightbulb,
+    title: "Creativity",
+    description: "We make use of cutting-edge, innovative, and modern art in making your dream home."
   },
   {
     icon: Zap,
-    title: "Empowerment",
-    description: "Making choices that advance our vision."
+    title: "Passion",
+    description: "We are enthusiastic, fond, and committed to building your ideal homes."
+  },
+  {
+    icon: Shield,
+    title: "Integrity",
+    description: "We adhere to uncompromising, undivided, and unbroken honesty in delivering the best services and homes."
+  },
+];
+
+const teamMembers = [
+  {
+    name: "Funmilayo Adesanya",
+    role: "MD/CEO",
+    image: funmilayoImg,
+    description: "Leading Light Way Homes with vision and dedication to transform the Nigerian real estate landscape.",
+  },
+  {
+    name: "Olumide Olujuyigbe",
+    role: "Chartered Architect",
+    image: olumideImg,
+    description: "Bringing architectural excellence and innovative designs to every project.",
+  },
+  {
+    name: "Agboola O. Osunbanjo",
+    role: "Civil/Structural Engineer",
+    image: agboolaImg,
+    description: "Ensuring structural integrity and engineering excellence in all our developments.",
+  },
+];
+
+const testimonials = [
+  {
+    quote: "Light Way Homes delivered as promised with my Land and ensured my allocation and documentation were done immediately after my final payment. Thank you for helping me find my dream home. I look forward to working with you again in the future.",
+    author: "Maryam Abubakar",
+  },
+  {
+    quote: "The team was not only professional but also friendly and approachable. The day I called was the same day I inspected the site. After my due diligence, I paid for my two-bedroom maisonette, and to my surprise, I got my receipt and contract of sale the same day. I would highly recommend their services to anyone in need of a trusted and reliable real estate company.",
+    author: "Bukola Falana",
   },
 ];
 
@@ -43,17 +88,21 @@ const About = () => {
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto container-padding relative z-10">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Content */}
+        {/* About Intro */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-20">
           <AnimatedSection animation="slide-right">
             <span className="inline-block text-secondary font-semibold uppercase tracking-widest text-xs md:text-sm mb-3">About Us</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-foreground">
-              Building <span className="text-gradient-brand">Dreams</span> Into Reality
+              We're a Reputable Real Estate Firm with <span className="text-gradient-brand">Uncompromising Integrity</span>
             </h2>
-            <p className="text-muted-foreground text-sm md:text-base lg:text-lg mb-6 md:mb-8 leading-relaxed">
-              Light Way Homes Ltd is a leading real estate advisory and developmental company 
-              dedicated to transforming the Nigerian real estate landscape. We create premium 
-              estates that combine luxury, comfort, and investment value.
+            <p className="text-muted-foreground text-sm md:text-base lg:text-lg mb-6 leading-relaxed">
+              Light Way Homes and Investment Limited is a real estate development company committed to bridging 
+              the massive housing deficit in Nigeria. We offer a new path to home ownership for Nigerians 
+              especially first time homeowners, by making it possible to own a home without stress or strain.
+            </p>
+            <p className="text-muted-foreground text-sm md:text-base lg:text-lg mb-6 leading-relaxed">
+              Through a well-crafted concept of developing multiple units within a colony, acquiring affordable, 
+              luxurious, sustainable and environmental friendly houses for our affable customers becomes very easy.
             </p>
 
             {/* Features */}
@@ -74,37 +123,117 @@ const About = () => {
             </Button>
           </AnimatedSection>
 
-          {/* Visual - Core Values */}
-          <AnimatedSection animation="slide-left" className="relative">
-            <div className="grid grid-cols-2 gap-3 md:gap-4">
-              {coreValues.map((value, index) => (
-                <AnimatedSection
-                  key={value.title}
-                  animation="scale"
-                  delay={index * 100}
-                >
-                  <div 
-                    className={`bg-card rounded-xl p-4 md:p-5 border border-border shadow-card card-hover group ${
-                      index % 2 === 1 ? 'mt-6 md:mt-8' : ''
-                    }`}
-                  >
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-brand rounded-lg flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
-                      <value.icon className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground" />
-                    </div>
-                    <h3 className="text-base md:text-lg font-bold text-foreground mb-1.5 md:mb-2">{value.title}</h3>
-                    <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">{value.description}</p>
-                  </div>
-                </AnimatedSection>
-              ))}
+          {/* Mission & Vision */}
+          <AnimatedSection animation="slide-left" className="space-y-6">
+            <div className="bg-card rounded-2xl p-6 md:p-8 border border-border card-hover">
+              <div className="w-14 h-14 bg-gradient-brand rounded-xl flex items-center justify-center mb-4">
+                <Target className="w-7 h-7 text-primary-foreground" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Our Mission</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                To blend creativity with professionalism in delivering well-structured, globally acceptable, 
+                and top-notch properties to our revered clients.
+              </p>
             </div>
 
-            {/* Decorative */}
-            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 md:w-96 h-72 md:h-96 bg-gradient-brand opacity-10 rounded-full blur-3xl" />
+            <div className="bg-card rounded-2xl p-6 md:p-8 border border-border card-hover">
+              <div className="w-14 h-14 bg-gradient-brand rounded-xl flex items-center justify-center mb-4">
+                <Lightbulb className="w-7 h-7 text-primary-foreground" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Our Vision</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                A world-class real estate development company, driven by value innovation and optimum service 
+                to deliver functional homes.
+              </p>
+            </div>
           </AnimatedSection>
         </div>
 
+        {/* Core Values */}
+        <div className="mb-20">
+          <AnimatedSection animation="fade-up" className="text-center mb-12">
+            <span className="text-secondary font-semibold uppercase tracking-widest text-sm">What Drives Us</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-3">Our Core Values</h2>
+          </AnimatedSection>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {coreValues.map((value, index) => (
+              <AnimatedSection key={value.title} animation="scale" delay={index * 100}>
+                <div className="bg-card rounded-xl p-6 border border-border card-hover group h-full">
+                  <div className="w-12 h-12 bg-gradient-brand rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <value.icon className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{value.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+
+        {/* Meet Our Team */}
+        <div className="mb-20">
+          <AnimatedSection animation="fade-up" className="text-center mb-12">
+            <span className="text-secondary font-semibold uppercase tracking-widest text-sm">Leadership</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-3">Meet Our Core Team</h2>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+            {teamMembers.map((member, index) => (
+              <AnimatedSection key={member.name} animation="fade-up" delay={index * 150}>
+                <div className="bg-card rounded-2xl overflow-hidden border border-border card-hover group">
+                  <div className="aspect-[4/5] overflow-hidden">
+                    <img 
+                      src={member.image} 
+                      alt={member.name} 
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-6 text-center">
+                    <h3 className="text-xl font-bold text-foreground mb-1">{member.name}</h3>
+                    <p className="text-secondary font-semibold mb-3">{member.role}</p>
+                    <p className="text-muted-foreground text-sm">{member.description}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+
+        {/* Testimonials */}
+        <div className="mb-20">
+          <AnimatedSection animation="fade-up" className="text-center mb-12">
+            <span className="text-secondary font-semibold uppercase tracking-widest text-sm">Testimonials</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-3">What Our Clients Say</h2>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            {testimonials.map((testimonial, index) => (
+              <AnimatedSection key={testimonial.author} animation="fade-up" delay={index * 150}>
+                <div className="bg-card rounded-2xl p-8 border border-border card-hover relative">
+                  <Quote className="w-10 h-10 text-secondary/30 absolute top-6 right-6" />
+                  <p className="text-muted-foreground italic mb-6 leading-relaxed relative z-10">
+                    "{testimonial.quote}"
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-brand rounded-full flex items-center justify-center">
+                      <span className="text-primary-foreground font-bold text-lg">
+                        {testimonial.author.charAt(0)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-bold text-foreground">{testimonial.author}</p>
+                      <p className="text-muted-foreground text-sm">Satisfied Client</p>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+
         {/* Stats Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-14 md:mt-20 pt-10 md:pt-12 border-t border-border">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-10 md:pt-12 border-t border-border">
           {[
             { end: 500, suffix: "+", label: "Happy Homeowners" },
             { end: 5, suffix: "+", label: "Years of Excellence" },
