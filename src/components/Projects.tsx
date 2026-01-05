@@ -31,7 +31,7 @@ const projects = [
     title: "Novara Court",
     location: "Arepo, Ogun State",
     image: property3,
-    status: "Coming Soon",
+    status: "Now Selling",
     price: "From ₦150M",
     type: "4 Bedroom Maisonette",
     size: "500 SQM",
