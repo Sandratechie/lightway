@@ -53,10 +53,11 @@ const Header = () => {
 
   const navLinks = [
     { name: "Home", href: "/", isRoute: true },
-    { name: "About", href: "/#about", isRoute: false },
-    { name: "Projects", href: "/#projects", isRoute: false },
+    { name: "Properties", href: "/properties", isRoute: true },
+    { name: "Services", href: "/services", isRoute: true },
+    { name: "About", href: "/about", isRoute: true },
     { name: "Career", href: "/career", isRoute: true },
-    { name: "Contact", href: "/#contact", isRoute: false },
+    { name: "Contact", href: "/contact", isRoute: true },
   ];
 
   const handleNavClick = (href: string, isRoute: boolean) => {
