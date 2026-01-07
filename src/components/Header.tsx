@@ -7,15 +7,37 @@ import logo from "@/assets/logo.png";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [hideNav, setHideNav] = useState(false);
   const location = useLocation();
+
+  // Initial load animation
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      // Update scrolled state for background
+      setIsScrolled(currentScrollY > 50);
+      
+      // Hide/show navbar on scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 150) {
+        setHideNav(true);
+      } else {
+        setHideNav(false);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
-    window.addEventListener('scroll', handleScroll);
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   // Handle hash navigation when coming from another page
   useEffect(() => {
@@ -51,71 +73,89 @@ const Header = () => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-background/98 backdrop-blur-md shadow-card border-b border-border' 
-        : 'bg-transparent'
-    }`}>
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-background/98 backdrop-blur-md shadow-card border-b border-border' 
+          : 'bg-transparent'
+      } ${hideNav ? '-translate-y-full' : 'translate-y-0'} ${
+        isVisible ? 'opacity-100' : 'opacity-0 -translate-y-4'
+      }`}
+    >
       <div className="container mx-auto container-padding">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
+          <Link 
+            to="/" 
+            className={`flex items-center transition-all duration-500 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+            }`}
+          >
             <img 
               src={logo} 
               alt="Light Way Homes" 
-              className={`transition-all duration-300 ${isScrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'}`}
+              className={`transition-all duration-300 hover:scale-105 ${isScrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'}`}
             />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {navLinks.map((link) => (
+            {navLinks.map((link, index) => (
               link.isRoute ? (
                 <Link
                   key={link.name}
                   to={link.href}
-                  className={`text-sm font-medium transition-colors duration-300 hover:text-secondary ${
+                  className={`text-sm font-medium transition-all duration-300 hover:text-secondary relative group ${
                     isScrolled ? 'text-foreground' : 'text-primary-foreground'
-                  }`}
+                  } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
+                  style={{ transitionDelay: `${(index + 1) * 100}ms` }}
                 >
                   {link.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full" />
                 </Link>
               ) : (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => handleNavClick(link.href, link.isRoute)}
-                  className={`text-sm font-medium transition-colors duration-300 hover:text-secondary ${
+                  className={`text-sm font-medium transition-all duration-300 hover:text-secondary relative group ${
                     isScrolled ? 'text-foreground' : 'text-primary-foreground'
-                  }`}
+                  } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
+                  style={{ transitionDelay: `${(index + 1) * 100}ms` }}
                 >
                   {link.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full" />
                 </a>
               )
             ))}
           </nav>
 
           {/* CTA & Phone */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div 
+            className={`hidden lg:flex items-center gap-4 transition-all duration-500 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            }`}
+            style={{ transitionDelay: '600ms' }}
+          >
             <a 
               href="tel:+2348038034077" 
-              className={`flex items-center gap-2 text-sm transition-colors ${
+              className={`flex items-center gap-2 text-sm transition-colors hover:scale-105 duration-300 ${
                 isScrolled ? 'text-muted-foreground hover:text-foreground' : 'text-primary-foreground/80 hover:text-primary-foreground'
               }`}
             >
               <Phone className="w-4 h-4" />
               <span>+234 803 803 4077</span>
             </a>
-            <Button variant="hero" size="default">
+            <Button variant="hero" size="default" className="hover:scale-105 transition-transform duration-300">
               Get Started
             </Button>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button
-            className={`lg:hidden p-2 rounded-lg transition-colors ${
+            className={`lg:hidden p-2 rounded-lg transition-all duration-300 hover:scale-110 ${
               isScrolled ? 'text-foreground' : 'text-primary-foreground'
-            }`}
+            } ${isVisible ? 'opacity-100' : 'opacity-0'}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -125,45 +165,49 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="lg:hidden bg-background border-t border-border animate-fade-in shadow-elevated">
-          <nav className="container mx-auto container-padding py-6 flex flex-col gap-1">
-            {navLinks.map((link) => (
-              link.isRoute ? (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className="text-foreground hover:text-secondary transition-colors py-3 font-medium border-b border-border/50 last:border-0"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ) : (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-foreground hover:text-secondary transition-colors py-3 font-medium border-b border-border/50 last:border-0"
-                  onClick={() => handleNavClick(link.href, link.isRoute)}
-                >
-                  {link.name}
-                </a>
-              )
-            ))}
-            <div className="pt-4 mt-2 border-t border-border">
-              <a 
-                href="tel:+2348038034077" 
-                className="flex items-center gap-2 text-muted-foreground py-2"
+      <div 
+        className={`lg:hidden bg-background border-t border-border shadow-elevated overflow-hidden transition-all duration-500 ${
+          isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <nav className="container mx-auto container-padding py-6 flex flex-col gap-1">
+          {navLinks.map((link, index) => (
+            link.isRoute ? (
+              <Link
+                key={link.name}
+                to={link.href}
+                className={`text-foreground hover:text-secondary hover:translate-x-2 transition-all duration-300 py-3 font-medium border-b border-border/50 last:border-0`}
+                style={{ transitionDelay: `${index * 50}ms` }}
+                onClick={() => setIsMenuOpen(false)}
               >
-                <Phone className="w-4 h-4" />
-                <span>+234 803 803 4077</span>
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-foreground hover:text-secondary hover:translate-x-2 transition-all duration-300 py-3 font-medium border-b border-border/50 last:border-0"
+                style={{ transitionDelay: `${index * 50}ms` }}
+                onClick={() => handleNavClick(link.href, link.isRoute)}
+              >
+                {link.name}
               </a>
-              <Button variant="hero" size="lg" className="w-full mt-4">
-                Get Started
-              </Button>
-            </div>
-          </nav>
-        </div>
-      )}
+            )
+          ))}
+          <div className="pt-4 mt-2 border-t border-border">
+            <a 
+              href="tel:+2348038034077" 
+              className="flex items-center gap-2 text-muted-foreground py-2"
+            >
+              <Phone className="w-4 h-4" />
+              <span>+234 803 803 4077</span>
+            </a>
+            <Button variant="hero" size="lg" className="w-full mt-4">
+              Get Started
+            </Button>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 };
