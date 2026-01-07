@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
 import logo from "@/assets/logo.png";
 
@@ -6,17 +7,18 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: "Home", href: "#" },
-    { name: "About Us", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about" },
+    { name: "Properties", href: "/properties" },
+    { name: "Services", href: "/services" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const projects = [
-    { name: "Roman Heights", href: "#projects" },
-    { name: "The Naples", href: "#projects" },
-    { name: "Novara Court", href: "#projects" },
-    { name: "View All", href: "#projects" },
+    { name: "Roman Heights", href: "/properties/roman-heights" },
+    { name: "The Naples", href: "/properties/the-naples" },
+    { name: "Novara Court", href: "/properties/novara-court" },
+    { name: "View All", href: "/properties" },
   ];
 
   const socials = [
@@ -35,13 +37,13 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
           {/* Brand */}
           <AnimatedSection animation="fade-up" className="col-span-2 md:col-span-1">
-            <a href="#" className="inline-block mb-4 md:mb-6 group">
+            <Link to="/" className="inline-block mb-4 md:mb-6 group">
               <img 
                 src={logo} 
                 alt="Light Way Homes" 
                 className="h-12 md:h-14 w-auto brightness-0 invert group-hover:scale-105 transition-transform"
               />
-            </a>
+            </Link>
             <p className="text-primary-foreground/70 text-xs md:text-sm mb-4 md:mb-6 leading-relaxed">
               Your trusted partner in premium real estate development across Nigeria.
             </p>
@@ -67,12 +69,12 @@ const Footer = () => {
             <ul className="space-y-2 md:space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
+                  <Link 
+                    to={link.href} 
                     className="text-primary-foreground/70 hover:text-secondary hover:translate-x-1 transition-all inline-block text-xs md:text-sm"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -84,12 +86,12 @@ const Footer = () => {
             <ul className="space-y-2 md:space-y-3">
               {projects.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
+                  <Link 
+                    to={link.href} 
                     className="text-primary-foreground/70 hover:text-secondary hover:translate-x-1 transition-all inline-block text-xs md:text-sm"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
