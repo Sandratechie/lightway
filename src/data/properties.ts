@@ -1,6 +1,23 @@
-import property1 from "@/assets/property-1.jpg";
-import property2 from "@/assets/property-2.jpg";
-import property3 from "@/assets/property-3.jpg";
+// Project Images
+import naplesHero from "@/assets/projects/naples-hero.jpg";
+import romanHeightsHero from "@/assets/projects/roman-heights-hero.jpg";
+import novaraHero from "@/assets/projects/novara-hero.jpg";
+import roman1 from "@/assets/projects/roman-1.jpg";
+import roman2 from "@/assets/projects/roman-2.jpg";
+import roman3 from "@/assets/projects/roman-3.jpg";
+import naplesBedroom1 from "@/assets/projects/naples-bedroom-1.jpg";
+import naplesBedroom2 from "@/assets/projects/naples-bedroom-2.jpg";
+
+// Property Images
+import naples4BedBq from "@/assets/properties/naples-4bed-bq.png";
+import naples500sqm from "@/assets/properties/naples-500sqm.jpg";
+import naples300sqm from "@/assets/properties/naples-300sqm.jpg";
+import naples2BedMaisonette from "@/assets/properties/naples-2bed-maisonette.jpg";
+import naples3BedApartment from "@/assets/properties/naples-3bed-apartment.jpg";
+import roman2BedMaisonette from "@/assets/properties/roman-2bed-maisonette.jpg";
+import roman3BedApartment from "@/assets/properties/roman-3bed-apartment.jpg";
+import novara300sqm from "@/assets/properties/novara-300sqm.jpg";
+import novara500sqm from "@/assets/properties/novara-500sqm.jpg";
 
 export interface Property {
   id: string;
@@ -27,7 +44,7 @@ export interface Property {
     monthlyPayment?: string;
   }[];
   coordinates?: { lat: number; lng: number };
-  projectSlug?: string; // Links property to parent project
+  projectSlug?: string;
 }
 
 export interface Project {
@@ -52,10 +69,10 @@ export const projects: Project[] = [
     title: "The Naples",
     location: "Voera Estate, Arepo, Ogun State",
     address: "Voera Estate, Behind Punch Newspaper, Arepo, Ogun State",
-    image: property2,
-    images: [property2, property1, property3],
+    image: naplesHero,
+    images: [naplesHero, naplesBedroom1, naplesBedroom2],
     status: "Pre-Order",
-    description: "The Naples is a premium residential development located in Voera Estate, Arepo. This exclusive estate offers a variety of property types including terrace townhouses, serviced plots, maisonettes, and apartments, all designed to meet the highest standards of modern living.",
+    description: "The Naples Arepo is a premium residential development tailored towards meeting modern day living with contemporary architecture. The development consists of exquisitely designed 4-bedroom terrace townhouses with BQ and service plots located in a secured and fully serviced community within Voera Estate.",
     amenities: [
       "24/7 Security and Power",
       "Parking Space",
@@ -74,10 +91,10 @@ export const projects: Project[] = [
     title: "The Roman Heights",
     location: "Arepo, Ogun State",
     address: "KM 28, Lagos-Ibadan Expressway, Arepo, Ogun State",
-    image: property1,
-    images: [property1, property2, property3],
+    image: romanHeightsHero,
+    images: [romanHeightsHero, roman1, roman2, roman3],
     status: "Pre-Order",
-    description: "The Roman Heights is the first high-rise luxury masterpiece in Arepo, featuring two units of 3-bedroom apartments and eight units of 2-bedroom maisonettes. This iconic development sets a new standard for luxury living in the area with world-class amenities and premium finishes.",
+    description: "Soaring to New Heights! Roman Heights by Lightway Homes is the ultimate high-rise luxury masterpiece in Arepo; the first of its kind. Get ready to elevate your lifestyle with a rooftop lounge, refreshing swimming pool, convenient lifts, modern office space, a standard gym, uninterrupted power supply, convenient parking and incredible common areas.",
     amenities: [
       "Rooftop Lounge",
       "Swimming Pool",
@@ -98,8 +115,8 @@ export const projects: Project[] = [
     title: "The Novara Courts",
     location: "Orilemo, Mowe, Ogun State",
     address: "Orilemo, Near Nestlé & Olam Group, Mowe, Ogun State",
-    image: property3,
-    images: [property3, property1, property2],
+    image: novaraHero,
+    images: [novaraHero, novara500sqm, novara300sqm],
     status: "Pre-Order",
     description: "The Novara Courts is an eco-friendly mixed residential development strategically located near major industrial hubs including Nestlé and Olam Group. This development offers affordable land plots in a well-planned estate with modern amenities and excellent infrastructure.",
     amenities: [
@@ -122,11 +139,11 @@ export const properties: Property[] = [
   {
     id: "naples-townhouse",
     slug: "the-naples-4bed-terrace-townhouse",
-    title: "4 Bedroom Terrace Townhouse + BQ",
+    title: "4 Bedroom + BQ",
     location: "Voera Estate, Arepo, Ogun State",
     address: "Voera Estate, Behind Punch Newspaper, Arepo, Ogun State",
-    image: property2,
-    images: [property2, property1, property3],
+    image: naples4BedBq,
+    images: [naples4BedBq, naplesHero, naplesBedroom1, naplesBedroom2],
     status: "Pre-Order",
     price: "From ₦150,000,000",
     priceRange: { min: 150000000, max: 180000000 },
@@ -181,8 +198,8 @@ export const properties: Property[] = [
     title: "500 SQM Serviced Plot",
     location: "Voera Estate, Arepo, Ogun State",
     address: "Voera Estate, Behind Punch Newspaper, Arepo, Ogun State",
-    image: property2,
-    images: [property2, property1, property3],
+    image: naples500sqm,
+    images: [naples500sqm, naplesHero],
     status: "Pre-Order",
     price: "From ₦30,000,000",
     priceRange: { min: 30000000, max: 35000000 },
@@ -233,8 +250,8 @@ export const properties: Property[] = [
     title: "300 SQM Serviced Plot",
     location: "Voera Estate, Arepo, Ogun State",
     address: "Voera Estate, Behind Punch Newspaper, Arepo, Ogun State",
-    image: property2,
-    images: [property2, property1, property3],
+    image: naples300sqm,
+    images: [naples300sqm, naplesHero],
     status: "Pre-Order",
     price: "From ₦25,000,000",
     priceRange: { min: 25000000, max: 28000000 },
@@ -285,8 +302,8 @@ export const properties: Property[] = [
     title: "2 Bedroom Maisonette",
     location: "Voera Estate, Arepo, Ogun State",
     address: "Voera Estate, Behind Punch Newspaper, Arepo, Ogun State",
-    image: property2,
-    images: [property2, property1, property3],
+    image: naples2BedMaisonette,
+    images: [naples2BedMaisonette, naplesHero, naplesBedroom1],
     status: "Coming Soon",
     price: "Contact for Price",
     priceRange: { min: 0, max: 0 },
@@ -325,8 +342,8 @@ export const properties: Property[] = [
     title: "3 Bedroom Apartment",
     location: "Voera Estate, Arepo, Ogun State",
     address: "Voera Estate, Behind Punch Newspaper, Arepo, Ogun State",
-    image: property2,
-    images: [property2, property1, property3],
+    image: naples3BedApartment,
+    images: [naples3BedApartment, naplesHero, naplesBedroom2],
     status: "Coming Soon",
     price: "Contact for Price",
     priceRange: { min: 0, max: 0 },
@@ -367,8 +384,8 @@ export const properties: Property[] = [
     title: "3 Bedroom Apartment",
     location: "Arepo, Ogun State",
     address: "KM 28, Lagos-Ibadan Expressway, Arepo, Ogun State",
-    image: property1,
-    images: [property1, property2, property3],
+    image: roman3BedApartment,
+    images: [roman3BedApartment, romanHeightsHero, roman1, roman2, roman3],
     status: "Pre-Order",
     price: "From ₦60,000,000",
     priceRange: { min: 60000000, max: 75000000 },
@@ -425,8 +442,8 @@ export const properties: Property[] = [
     title: "2 Bedroom Maisonette",
     location: "Arepo, Ogun State",
     address: "KM 28, Lagos-Ibadan Expressway, Arepo, Ogun State",
-    image: property1,
-    images: [property1, property2, property3],
+    image: roman2BedMaisonette,
+    images: [roman2BedMaisonette, romanHeightsHero, roman1, roman2],
     status: "Pre-Order",
     price: "From ₦55,000,000",
     priceRange: { min: 55000000, max: 65000000 },
@@ -485,8 +502,8 @@ export const properties: Property[] = [
     title: "600 SQM Plot",
     location: "Orilemo, Mowe, Ogun State",
     address: "Orilemo, Near Nestlé & Olam Group, Mowe, Ogun State",
-    image: property3,
-    images: [property3, property1, property2],
+    image: novara500sqm,
+    images: [novara500sqm, novaraHero],
     status: "Pre-Order",
     price: "From ₦7,500,000",
     priceRange: { min: 7500000, max: 9000000 },
@@ -539,8 +556,8 @@ export const properties: Property[] = [
     title: "500 SQM Plot",
     location: "Orilemo, Mowe, Ogun State",
     address: "Orilemo, Near Nestlé & Olam Group, Mowe, Ogun State",
-    image: property3,
-    images: [property3, property1, property2],
+    image: novara500sqm,
+    images: [novara500sqm, novaraHero],
     status: "Pre-Order",
     price: "From ₦6,500,000",
     priceRange: { min: 6500000, max: 7500000 },
@@ -592,8 +609,8 @@ export const properties: Property[] = [
     title: "300 SQM Plot",
     location: "Orilemo, Mowe, Ogun State",
     address: "Orilemo, Near Nestlé & Olam Group, Mowe, Ogun State",
-    image: property3,
-    images: [property3, property1, property2],
+    image: novara300sqm,
+    images: [novara300sqm, novaraHero],
     status: "Pre-Order",
     price: "From ₦4,500,000",
     priceRange: { min: 4500000, max: 5500000 },
