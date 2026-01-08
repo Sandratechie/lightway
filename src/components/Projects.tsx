@@ -1,40 +1,28 @@
-import { MapPin, ArrowUpRight, Bed, Ruler } from "lucide-react";
+import { MapPin, ArrowUpRight, Home, Ruler } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
-import property1 from "@/assets/property-1.jpg";
-import property2 from "@/assets/property-2.jpg";
-import property3 from "@/assets/property-3.jpg";
+import { Link } from "react-router-dom";
+import { projects } from "@/data/properties";
 
-const projects = [
+// Map projects to display format with price ranges
+const projectDisplayData = [
   {
-    id: 1,
-    title: "Roman Heights",
-    location: "Arepo, Ogun State",
-    image: property1,
-    status: "Now Selling",
+    ...projects[0], // The Naples
     price: "From ₦25M",
-    type: "4 Bedroom + BQ",
-    size: "400 SQM",
-  },
-  {
-    id: 2,
-    title: "The Naples",
-    location: "Arepo, Ogun State",
-    image: property2,
-    status: "Pre-Order",
-    price: "From ₦30M",
-    type: "Land (300-500 SQM)",
+    type: "Mixed Development",
     size: "300-500 SQM",
   },
   {
-    id: 3,
-    title: "Novara Court",
-    location: "Arepo, Ogun State",
-    image: property3,
-    status: "Now Selling",
-    price: "From ₦150M",
-    type: "4 Bedroom Maisonette",
-    size: "500 SQM",
+    ...projects[1], // The Roman Heights
+    price: "From ₦55M",
+    type: "High-Rise Luxury",
+    size: "150-180 SQM",
+  },
+  {
+    ...projects[2], // The Novara Courts
+    price: "From ₦4.5M",
+    type: "Eco-Friendly Estate",
+    size: "300-600 SQM",
   },
 ];
 
@@ -60,84 +48,88 @@ const Projects = () => {
 
         {/* Projects Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 lg:gap-8">
-          {projects.map((project, index) => (
+          {projectDisplayData.map((project, index) => (
             <AnimatedSection
               key={project.id}
               animation="fade-up"
               delay={index * 150}
             >
-              <div className="group bg-card rounded-xl overflow-hidden shadow-card card-hover border border-border h-full">
-                {/* Image */}
-                <div className="relative h-48 sm:h-52 md:h-60 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover img-zoom"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent" />
-                  
-                  {/* Status Badge */}
-                  <div className="absolute top-3 left-3">
-                    <span className={`px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm ${
-                      project.status === "Now Selling" 
-                        ? "bg-secondary/90 text-secondary-foreground" 
-                        : project.status === "Coming Soon"
-                        ? "bg-foreground/70 text-background"
-                        : "bg-primary/90 text-primary-foreground"
-                    }`}>
-                      {project.status}
-                    </span>
-                  </div>
-
-                  {/* Price overlay */}
-                  <div className="absolute bottom-3 left-3">
-                    <span className="text-xl md:text-2xl font-bold text-primary-foreground drop-shadow-lg">{project.price}</span>
-                  </div>
-
-                  {/* Arrow */}
-                  <div className="absolute top-3 right-3 w-9 h-9 bg-primary-foreground/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-secondary group-hover:scale-110">
-                    <ArrowUpRight className="w-4 h-4 text-primary-foreground" />
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-4 md:p-5">
-                  <div className="flex items-center gap-1.5 text-muted-foreground text-xs md:text-sm mb-2">
-                    <MapPin className="w-3.5 h-3.5" />
-                    <span>{project.location}</span>
-                  </div>
-                  <h3 className="text-lg md:text-xl font-bold mb-3 group-hover:text-primary transition-colors text-foreground">
-                    {project.title}
-                  </h3>
-                  
-                  {/* Property details */}
-                  <div className="flex items-center gap-4 text-xs md:text-sm text-muted-foreground mb-4 pb-4 border-b border-border">
-                    <div className="flex items-center gap-1.5">
-                      <Bed className="w-4 h-4" />
-                      <span>{project.type}</span>
+              <Link to={`/properties?project=${project.slug}`} className="block h-full">
+                <div className="group bg-card rounded-xl overflow-hidden shadow-card card-hover border border-border h-full">
+                  {/* Image */}
+                  <div className="relative h-48 sm:h-52 md:h-60 overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover img-zoom"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent" />
+                    
+                    {/* Status Badge */}
+                    <div className="absolute top-3 left-3">
+                      <span className={`px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm ${
+                        project.status === "Now Selling" 
+                          ? "bg-secondary/90 text-secondary-foreground" 
+                          : project.status === "Coming Soon"
+                          ? "bg-foreground/70 text-background"
+                          : "bg-primary/90 text-primary-foreground"
+                      }`}>
+                        {project.status}
+                      </span>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <Ruler className="w-4 h-4" />
-                      <span>{project.size}</span>
+
+                    {/* Price overlay */}
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-xl md:text-2xl font-bold text-primary-foreground drop-shadow-lg">{project.price}</span>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="absolute top-3 right-3 w-9 h-9 bg-primary-foreground/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-secondary group-hover:scale-110">
+                      <ArrowUpRight className="w-4 h-4 text-primary-foreground" />
                     </div>
                   </div>
 
-                  <Button variant="outline" size="sm" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground group/btn">
-                    View Details
-                    <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                  </Button>
+                  {/* Content */}
+                  <div className="p-4 md:p-5">
+                    <div className="flex items-center gap-1.5 text-muted-foreground text-xs md:text-sm mb-2">
+                      <MapPin className="w-3.5 h-3.5" />
+                      <span>{project.location}</span>
+                    </div>
+                    <h3 className="text-lg md:text-xl font-bold mb-3 group-hover:text-primary transition-colors text-foreground">
+                      {project.title}
+                    </h3>
+                    
+                    {/* Property details */}
+                    <div className="flex items-center gap-4 text-xs md:text-sm text-muted-foreground mb-4 pb-4 border-b border-border">
+                      <div className="flex items-center gap-1.5">
+                        <Home className="w-4 h-4" />
+                        <span>{project.type}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Ruler className="w-4 h-4" />
+                        <span>{project.size}</span>
+                      </div>
+                    </div>
+
+                    <Button variant="outline" size="sm" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground group/btn">
+                      View Details
+                      <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </AnimatedSection>
           ))}
         </div>
 
         {/* View All CTA */}
         <AnimatedSection className="text-center mt-10 md:mt-12" delay={450}>
-          <Button variant="hero" size="lg" className="shadow-lg shadow-secondary/20">
-            View All Projects
-            <ArrowUpRight className="w-5 h-5" />
-          </Button>
+          <Link to="/properties">
+            <Button variant="hero" size="lg" className="shadow-lg shadow-secondary/20">
+              View All Properties
+              <ArrowUpRight className="w-5 h-5" />
+            </Button>
+          </Link>
         </AnimatedSection>
       </div>
     </section>
