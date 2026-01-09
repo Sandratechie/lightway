@@ -66,13 +66,15 @@ const Hero = () => {
             }`}
           />
         ))}
-        {/* Overlay Gradients - Darker for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0d0916]/95 via-[#0d0916]/75 to-[#0d0916]/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0d0916] via-transparent to-[#0d0916]/50" />
-        {/* Color accent overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple/20 via-transparent to-magenta/10" />
+        {/* Overlay Gradients - Brighter with brand colors */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-dark/80 via-purple/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-purple-dark/90 via-transparent to-purple-dark/30" />
+        {/* Color accent overlay - Purple/Magenta brand colors */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-secondary/20" />
+        {/* Subtle brightness layer */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-primary-foreground/5 to-secondary/10" />
         {/* Animated Grain Effect */}
-        <div className="absolute inset-0 opacity-[0.04] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==')]" />
+        <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==')]" />
       </div>
 
       {/* Floating Particles Effect */}

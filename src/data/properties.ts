@@ -1,10 +1,8 @@
 // Project Images
 import naplesHero from "@/assets/projects/naples-hero.jpg";
-import romanHeightsHero from "@/assets/projects/roman-heights-hero.jpg";
 import novaraHero from "@/assets/projects/novara-hero.jpg";
-import roman1 from "@/assets/projects/roman-1.jpg";
-import roman2 from "@/assets/projects/roman-2.jpg";
-import roman3 from "@/assets/projects/roman-3.jpg";
+import naplesLand1 from "@/assets/projects/naples-land-1.jpg";
+import naplesLand2 from "@/assets/projects/naples-land-2.jpg";
 import naplesBedroom1 from "@/assets/projects/naples-bedroom-1.jpg";
 import naplesBedroom2 from "@/assets/projects/naples-bedroom-2.jpg";
 
@@ -12,8 +10,6 @@ import naplesBedroom2 from "@/assets/projects/naples-bedroom-2.jpg";
 import naples4BedBq from "@/assets/properties/naples-4bed-bq.png";
 import naples500sqm from "@/assets/properties/naples-500sqm.jpg";
 import naples300sqm from "@/assets/properties/naples-300sqm.jpg";
-import roman2BedMaisonette from "@/assets/properties/roman-2bed-maisonette.jpg";
-import roman3BedApartment from "@/assets/properties/roman-3bed-apartment.jpg";
 import novara300sqm from "@/assets/properties/novara-300sqm.jpg";
 import novara500sqm from "@/assets/properties/novara-500sqm.jpg";
 
@@ -59,18 +55,18 @@ export interface Project {
   coordinates?: { lat: number; lng: number };
 }
 
-// Main Projects
+// Main Projects (Naples and Novara only)
 export const projects: Project[] = [
   {
     id: "project-1",
     slug: "the-naples",
-    title: "The Naples",
-    location: "Voera Estate, Arepo, Ogun State",
-    address: "Voera Estate, Behind Punch Newspaper, Arepo, Ogun State",
-    image: naplesHero,
-    images: [naplesHero, naplesBedroom1, naplesBedroom2],
-    status: "Pre-Order",
-    description: "The Naples Arepo is a premium residential development tailored towards meeting modern day living with contemporary architecture. The development consists of exquisitely designed 4-bedroom terrace townhouses with BQ and service plots located in a secured and fully serviced community within Voera Estate.",
+    title: "The Naples Estate",
+    location: "Arepo, Ogun State",
+    address: "Naples Estate, Arepo, Ogun State",
+    image: naplesLand1,
+    images: [naplesLand1, naplesLand2, naplesHero, naplesBedroom1, naplesBedroom2],
+    status: "Now Selling",
+    description: "Naples Estate, Arepo is a premium residential development with registered survey. The development offers serviced land plots and exquisitely designed 4-bedroom terrace townhouses with BQ in a secured and fully serviced community.",
     amenities: [
       "24/7 Security and Power",
       "Parking Space",
@@ -85,38 +81,14 @@ export const projects: Project[] = [
   },
   {
     id: "project-2",
-    slug: "the-roman-heights",
-    title: "The Roman Heights",
-    location: "Arepo, Ogun State",
-    address: "KM 28, Lagos-Ibadan Expressway, Arepo, Ogun State",
-    image: romanHeightsHero,
-    images: [romanHeightsHero, roman1, roman2, roman3],
-    status: "Pre-Order",
-    description: "Soaring to New Heights! Roman Heights by Lightway Homes is the ultimate high-rise luxury masterpiece in Arepo; the first of its kind. Get ready to elevate your lifestyle with a rooftop lounge, refreshing swimming pool, convenient lifts, modern office space, a standard gym, uninterrupted power supply, convenient parking and incredible common areas.",
-    amenities: [
-      "Rooftop Lounge",
-      "Swimming Pool",
-      "Elevator",
-      "Gymnasium",
-      "Co-working Space",
-      "Automated Gate Access",
-      "Central Sewage Treatment",
-      "Water Treatment Plant",
-      "24/7 Security",
-      "Backup Power Supply",
-    ],
-    coordinates: { lat: 6.7174, lng: 3.4516 },
-  },
-  {
-    id: "project-3",
     slug: "the-novara-courts",
     title: "The Novara Courts",
     location: "Orilemo, Mowe, Ogun State",
     address: "Orilemo, Near Nestlé & Olam Group, Mowe, Ogun State",
     image: novaraHero,
     images: [novaraHero, novara500sqm, novara300sqm],
-    status: "Pre-Order",
-    description: "The Novara Courts is an eco-friendly mixed residential development strategically located near major industrial hubs including Nestlé and Olam Group. This development offers affordable land plots in a well-planned estate with modern amenities and excellent infrastructure.",
+    status: "Now Selling",
+    description: "The Novara Courts is an eco-friendly residential development strategically located near major industrial hubs including Nestlé, Olam Group, International Breweries, Apple and Pears Ltd, Christopher University, and RCCG Camp. 45 minutes to Lagos International Airport.",
     amenities: [
       "Estate Mall",
       "Gymnasium",
@@ -131,17 +103,17 @@ export const projects: Project[] = [
   },
 ];
 
-// All Properties (individual units within projects)
+// All Properties (Naples: Land + 4bed BQ | Novara: Land only)
 export const properties: Property[] = [
-  // The Naples Properties (Land + 4 Bedroom BQ only)
+  // Naples Estate Properties
   {
     id: "naples-townhouse",
     slug: "the-naples-4bed-terrace-townhouse",
     title: "4 Bedroom + BQ",
-    location: "Voera Estate, Arepo, Ogun State",
-    address: "Voera Estate, Behind Punch Newspaper, Arepo, Ogun State",
+    location: "Naples Estate, Arepo, Ogun State",
+    address: "Naples Estate, Arepo, Ogun State",
     image: naples4BedBq,
-    images: [naples4BedBq, naplesHero, naplesBedroom1, naplesBedroom2],
+    images: [naples4BedBq, naplesHero, naplesBedroom1, naplesBedroom2, naplesLand1],
     status: "Now Selling",
     price: "From ₦150,000,000",
     priceRange: { min: 150000000, max: 180000000 },
@@ -149,7 +121,7 @@ export const properties: Property[] = [
     size: "450 SQM",
     bedrooms: 4,
     bathrooms: 5,
-    description: "Luxurious 4-bedroom terrace townhouse with boys' quarters at The Naples, Voera Estate. Features contemporary architecture, premium finishes, and spacious living areas designed for modern family living.",
+    description: "Luxurious 4-bedroom terrace townhouse with boys' quarters at Naples Estate, Arepo. Features contemporary architecture, premium finishes, and spacious living areas designed for modern family living.",
     features: [
       "Contemporary architectural design",
       "Spacious living and dining areas",
@@ -194,16 +166,16 @@ export const properties: Property[] = [
     id: "naples-500sqm",
     slug: "the-naples-500sqm-serviced-plot",
     title: "500 SQM Serviced Plot",
-    location: "Voera Estate, Arepo, Ogun State",
-    address: "Voera Estate, Behind Punch Newspaper, Arepo, Ogun State",
-    image: naples500sqm,
-    images: [naples500sqm, naplesHero],
+    location: "Naples Estate, Arepo, Ogun State",
+    address: "Naples Estate, Arepo, Ogun State",
+    image: naplesLand1,
+    images: [naplesLand1, naplesLand2, naples500sqm, naplesHero],
     status: "Now Selling",
     price: "₦9,000,000 Initial Deposit",
     priceRange: { min: 9000000, max: 15000000 },
     type: "Serviced Land",
     size: "500 SQM",
-    description: "Premium 500 square meter serviced plot at The Naples Estate, Arepo. Registered survey with excellent infrastructure and amenities. Perfect for building your dream home.",
+    description: "Premium 500 square meter serviced plot at Naples Estate, Arepo. Registered survey with excellent infrastructure and amenities. Perfect for building your dream home.",
     features: [
       "Dry and solid land",
       "Registered survey",
@@ -240,16 +212,16 @@ export const properties: Property[] = [
     id: "naples-300sqm",
     slug: "the-naples-300sqm-serviced-plot",
     title: "300 SQM Serviced Plot",
-    location: "Voera Estate, Arepo, Ogun State",
-    address: "Voera Estate, Behind Punch Newspaper, Arepo, Ogun State",
-    image: naples300sqm,
-    images: [naples300sqm, naplesHero],
+    location: "Naples Estate, Arepo, Ogun State",
+    address: "Naples Estate, Arepo, Ogun State",
+    image: naplesLand2,
+    images: [naplesLand2, naplesLand1, naples300sqm, naplesHero],
     status: "Now Selling",
     price: "₦7,500,000 Initial Deposit",
     priceRange: { min: 7500000, max: 12000000 },
     type: "Serviced Land",
     size: "300 SQM",
-    description: "Affordable 300 square meter serviced plot at The Naples Estate, Arepo. Registered survey with excellent infrastructure. Ideal for compact home designs.",
+    description: "Affordable 300 square meter serviced plot at Naples Estate, Arepo. Registered survey with excellent infrastructure. Ideal for compact home designs.",
     features: [
       "Dry and solid land",
       "Registered survey",
@@ -283,125 +255,7 @@ export const properties: Property[] = [
     projectSlug: "the-naples",
   },
 
-  // The Roman Heights Properties
-  {
-    id: "roman-3bed",
-    slug: "the-roman-heights-3bed-apartment",
-    title: "3 Bedroom Apartment",
-    location: "Arepo, Ogun State",
-    address: "KM 28, Lagos-Ibadan Expressway, Arepo, Ogun State",
-    image: roman3BedApartment,
-    images: [roman3BedApartment, romanHeightsHero, roman1, roman2, roman3],
-    status: "Pre-Order",
-    price: "From ₦60,000,000",
-    priceRange: { min: 60000000, max: 75000000 },
-    type: "3 Bedroom Apartment",
-    size: "180 SQM",
-    bedrooms: 3,
-    bathrooms: 4,
-    description: "Luxurious 3-bedroom apartment in The Roman Heights, Arepo's first high-rise luxury development. Features premium finishes, elevator access, and world-class amenities including rooftop lounge and swimming pool.",
-    features: [
-      "High-rise luxury living",
-      "Elevator access",
-      "Spacious living and dining",
-      "Modern fitted kitchen",
-      "All rooms en-suite",
-      "Premium flooring",
-      "Smart home ready",
-      "Balcony with panoramic views",
-    ],
-    amenities: [
-      "Rooftop Lounge",
-      "Swimming Pool",
-      "Elevator",
-      "Gymnasium",
-      "Co-working Space",
-      "Automated Gate Access",
-      "Central Sewage Treatment",
-      "24/7 Security",
-    ],
-    paymentPlans: [
-      {
-        name: "Outright Payment",
-        duration: "Immediate",
-        initialDeposit: "100%",
-      },
-      {
-        name: "6 Months Plan",
-        duration: "6 months",
-        initialDeposit: "70%",
-        monthlyPayment: "5% per month",
-      },
-      {
-        name: "12 Months Plan",
-        duration: "12 months",
-        initialDeposit: "50%",
-        monthlyPayment: "Spread over 12 months",
-      },
-    ],
-    coordinates: { lat: 6.7174, lng: 3.4516 },
-    projectSlug: "the-roman-heights",
-  },
-  {
-    id: "roman-2bed-maisonette",
-    slug: "the-roman-heights-2bed-maisonette",
-    title: "2 Bedroom Maisonette",
-    location: "Arepo, Ogun State",
-    address: "KM 28, Lagos-Ibadan Expressway, Arepo, Ogun State",
-    image: roman2BedMaisonette,
-    images: [roman2BedMaisonette, romanHeightsHero, roman1, roman2],
-    status: "Pre-Order",
-    price: "From ₦55,000,000",
-    priceRange: { min: 55000000, max: 65000000 },
-    type: "2 Bedroom Maisonette",
-    size: "150 SQM",
-    bedrooms: 2,
-    bathrooms: 3,
-    description: "Stylish 2-bedroom maisonette in The Roman Heights high-rise development. Perfect for young professionals and small families seeking luxury living with premium amenities.",
-    features: [
-      "Duplex-style living",
-      "Elevator access",
-      "Open-plan living area",
-      "Modern fitted kitchen",
-      "All rooms en-suite",
-      "Premium flooring",
-      "Balcony",
-      "Smart home ready",
-    ],
-    amenities: [
-      "Rooftop Lounge",
-      "Swimming Pool",
-      "Elevator",
-      "Gymnasium",
-      "Co-working Space",
-      "Automated Gate Access",
-      "Central Sewage Treatment",
-      "24/7 Security",
-    ],
-    paymentPlans: [
-      {
-        name: "Outright Payment",
-        duration: "Immediate",
-        initialDeposit: "100%",
-      },
-      {
-        name: "6 Months Plan",
-        duration: "6 months",
-        initialDeposit: "70%",
-        monthlyPayment: "5% per month",
-      },
-      {
-        name: "12 Months Plan",
-        duration: "12 months",
-        initialDeposit: "50%",
-        monthlyPayment: "Spread over 12 months",
-      },
-    ],
-    coordinates: { lat: 6.7174, lng: 3.4516 },
-    projectSlug: "the-roman-heights",
-  },
-
-  // The Novara Courts Properties (Land Only - 300sqm, 500sqm, 600sqm)
+  // Novara Courts Properties (Land Only - 300sqm, 500sqm, 600sqm)
   {
     id: "novara-300sqm",
     slug: "the-novara-courts-300sqm-plot",
