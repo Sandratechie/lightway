@@ -4,24 +4,18 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { Link } from "react-router-dom";
 import { projects } from "@/data/properties";
 
-// Map projects to display format with price ranges
+// Map projects to display format with price ranges (Naples and Novara only)
 const projectDisplayData = [
   {
-    ...projects[0], // The Naples
-    price: "From ₦25M",
-    type: "Mixed Development",
+    ...projects[0], // Naples Estate
+    price: "From ₦7.5M",
+    type: "Land & Townhouse",
     size: "300-500 SQM",
   },
   {
-    ...projects[1], // The Roman Heights
-    price: "From ₦55M",
-    type: "High-Rise Luxury",
-    size: "150-180 SQM",
-  },
-  {
-    ...projects[2], // The Novara Courts
-    price: "From ₦4.5M",
-    type: "Eco-Friendly Estate",
+    ...projects[1], // Novara Courts
+    price: "From ₦5M",
+    type: "Residential Land",
     size: "300-600 SQM",
   },
 ];

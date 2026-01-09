@@ -32,11 +32,11 @@ const Properties = () => {
       />
 
       {/* Filters Section */}
-      <section className="py-6 md:py-8 bg-muted border-b border-border sticky top-16 md:top-20 z-30 backdrop-blur-md">
+      <section className="py-4 md:py-6 bg-muted/80 border-b border-border sticky top-16 md:top-20 z-30 backdrop-blur-md">
         <div className="container mx-auto container-padding">
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-center justify-between">
             {/* Search */}
-            <div className="relative w-full sm:w-auto sm:min-w-[300px]">
+            <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
@@ -48,21 +48,23 @@ const Properties = () => {
             </div>
 
             {/* Status Filter */}
-            <div className="flex items-center gap-2 flex-wrap justify-center">
-              <Filter className="w-4 h-4 text-muted-foreground hidden sm:block" />
-              {statusOptions.map((status) => (
-                <button
-                  key={status}
-                  onClick={() => setStatusFilter(status)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    statusFilter === status
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-background border border-border text-muted-foreground hover:border-primary hover:text-primary"
-                  }`}
-                >
-                  {status}
-                </button>
-              ))}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+              <Filter className="w-4 h-4 text-muted-foreground flex-shrink-0 hidden sm:block" />
+              <div className="flex gap-2">
+                {statusOptions.map((status) => (
+                  <button
+                    key={status}
+                    onClick={() => setStatusFilter(status)}
+                    className={`px-3 md:px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
+                      statusFilter === status
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-background border border-border text-muted-foreground hover:border-primary hover:text-primary"
+                    }`}
+                  >
+                    {status}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
