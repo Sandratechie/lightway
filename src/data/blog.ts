@@ -66,7 +66,7 @@ export const blogPosts: BlogPost[] = [
       <h2>Light Way Homes Guarantee</h2>
       <p>All our properties come with proper documentation. The Naples is covered by a Certificate of Occupancy, while Novara Court is covered by a registered survey (OG/0765/2023/067), ensuring your investment is secure.</p>
     `,
-    author: "Funmilola Adesanya",
+    author: "Funmilayo Adesanya",
     date: "2024-01-08",
     category: "Education",
     image: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=800&auto=format&fit=crop",
