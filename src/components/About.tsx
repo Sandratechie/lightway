@@ -50,14 +50,14 @@ const coreValues = [
 
 const teamMembers = [
   {
-    name: "Funmilayo Adesanya",
+    name: "Funmilola Adesanya",
     role: "MD/CEO",
     image: funmilayoImg,
     description: "Leading Light Way Homes with vision and dedication to transform the Nigerian real estate landscape.",
   },
   {
     name: "Olumide Olujuyigbe",
-    role: "Chartered Architect",
+    role: "Director",
     image: olumideImg,
     description: "Bringing architectural excellence and innovative designs to every project.",
   },
