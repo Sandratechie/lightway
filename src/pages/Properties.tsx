@@ -32,38 +32,43 @@ const Properties = () => {
       />
 
       {/* Filters Section */}
-      <section className="py-4 md:py-6 bg-muted/80 border-b border-border sticky top-16 md:top-20 z-30 backdrop-blur-md">
+      <section className="py-6 md:py-8 bg-gradient-to-b from-muted/60 to-background border-b border-border">
         <div className="container mx-auto container-padding">
-          <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-center justify-between">
-            {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Search properties..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-background border border-border rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground text-sm"
-              />
-            </div>
+          <div className="bg-card rounded-xl border border-border shadow-sm p-4 md:p-6">
+            <div className="flex flex-col gap-4">
+              {/* Search Row */}
+              <div className="relative w-full">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder="Search by property name or location..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 bg-background border border-border rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground"
+                />
+              </div>
 
-            {/* Status Filter */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
-              <Filter className="w-4 h-4 text-muted-foreground flex-shrink-0 hidden sm:block" />
-              <div className="flex gap-2">
-                {statusOptions.map((status) => (
-                  <button
-                    key={status}
-                    onClick={() => setStatusFilter(status)}
-                    className={`px-3 md:px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
-                      statusFilter === status
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-background border border-border text-muted-foreground hover:border-primary hover:text-primary"
-                    }`}
-                  >
-                    {status}
-                  </button>
-                ))}
+              {/* Filter Row */}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Filter className="w-4 h-4" />
+                  <span className="font-medium">Filter by status:</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {statusOptions.map((status) => (
+                    <button
+                      key={status}
+                      onClick={() => setStatusFilter(status)}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                        statusFilter === status
+                          ? "bg-primary text-primary-foreground shadow-md"
+                          : "bg-muted border border-border text-muted-foreground hover:border-primary hover:text-primary hover:bg-primary/5"
+                      }`}
+                    >
+                      {status}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
