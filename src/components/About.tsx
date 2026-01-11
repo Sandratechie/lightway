@@ -1,4 +1,4 @@
-import { CheckCircle, ArrowRight, Target, Shield, Users, Zap, Lightbulb, Heart, Quote } from "lucide-react";
+import { CheckCircle, ArrowRight, Target, Shield, Users, Zap, Lightbulb, Heart, Quote, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CountUpNumber from "@/components/CountUpNumber";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -83,17 +83,23 @@ const testimonials = [
 const About = () => {
   return (
     <section id="about" className="section-padding bg-background relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
+      {/* Enhanced Background Effects */}
+      <div className="absolute top-1/4 left-0 w-[700px] h-[700px] bg-primary/8 rounded-full blur-[180px] pointer-events-none animate-pulse-glow" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-secondary/8 rounded-full blur-[150px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
+      
+      {/* Grid pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-20" />
 
       <div className="container mx-auto container-padding relative z-10">
         {/* About Intro */}
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-20">
           <AnimatedSection animation="slide-right">
-            <span className="inline-block text-secondary font-semibold uppercase tracking-widest text-xs md:text-sm mb-3">About Us</span>
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 text-secondary font-semibold uppercase tracking-widest text-xs md:text-sm mb-4 rounded-full border border-secondary/20 animate-border-glow">
+              <Sparkles className="w-4 h-4" />
+              About Us
+            </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-foreground">
-              We're a Reputable Real Estate Firm with <span className="text-gradient-brand">Uncompromising Integrity</span>
+              We're a Reputable Real Estate Firm with <span className="text-gradient-vibrant">Uncompromising Integrity</span>
             </h2>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg mb-6 leading-relaxed">
               Light Way Homes and Investment Limited is a real estate development company committed to bridging 
@@ -109,42 +115,48 @@ const About = () => {
             <div className="grid sm:grid-cols-2 gap-3 mb-6 md:mb-8">
               {features.map((feature, index) => (
                 <AnimatedSection key={index} animation="fade-up" delay={index * 50}>
-                  <div className="flex items-start gap-2.5 group">
-                    <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-secondary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                    <span className="text-foreground/80 text-xs md:text-sm">{feature}</span>
+                  <div className="flex items-start gap-2.5 group p-2 rounded-lg hover:bg-secondary/5 transition-colors">
+                    <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-secondary flex-shrink-0 mt-0.5 group-hover:scale-110 group-hover:rotate-12 transition-transform" />
+                    <span className="text-foreground/80 text-xs md:text-sm group-hover:text-foreground transition-colors">{feature}</span>
                   </div>
                 </AnimatedSection>
               ))}
             </div>
 
-            <Button variant="hero" size="lg" className="shadow-lg shadow-secondary/20">
+            <Button variant="hero" size="lg" className="shadow-glow btn-glow animate-shine group">
               Learn More About Us
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </AnimatedSection>
 
           {/* Mission & Vision */}
           <AnimatedSection animation="slide-left" className="space-y-6">
-            <div className="bg-card rounded-2xl p-6 md:p-8 border border-border card-hover">
-              <div className="w-14 h-14 bg-gradient-brand rounded-xl flex items-center justify-center mb-4">
-                <Target className="w-7 h-7 text-primary-foreground" />
+            <div className="bg-card rounded-2xl p-6 md:p-8 border border-border card-hover relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="w-14 h-14 bg-gradient-brand rounded-xl flex items-center justify-center mb-4 shadow-glow group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                  <Target className="w-7 h-7 text-primary-foreground" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Our Mission</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  To blend creativity with professionalism in delivering well-structured, globally acceptable, 
+                  and top-notch properties to our revered clients.
+                </p>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Our Mission</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                To blend creativity with professionalism in delivering well-structured, globally acceptable, 
-                and top-notch properties to our revered clients.
-              </p>
             </div>
 
-            <div className="bg-card rounded-2xl p-6 md:p-8 border border-border card-hover">
-              <div className="w-14 h-14 bg-gradient-brand rounded-xl flex items-center justify-center mb-4">
-                <Lightbulb className="w-7 h-7 text-primary-foreground" />
+            <div className="bg-card rounded-2xl p-6 md:p-8 border border-border card-hover relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="w-14 h-14 bg-gradient-brand rounded-xl flex items-center justify-center mb-4 shadow-glow group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                  <Lightbulb className="w-7 h-7 text-primary-foreground" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Our Vision</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  A world-class real estate development company, driven by value innovation and optimum service 
+                  to deliver functional homes.
+                </p>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Our Vision</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                A world-class real estate development company, driven by value innovation and optimum service 
-                to deliver functional homes.
-              </p>
             </div>
           </AnimatedSection>
         </div>
@@ -152,19 +164,25 @@ const About = () => {
         {/* Core Values */}
         <div className="mb-20">
           <AnimatedSection animation="fade-up" className="text-center mb-12">
-            <span className="text-secondary font-semibold uppercase tracking-widest text-sm">What Drives Us</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-3">Our Core Values</h2>
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary font-semibold uppercase tracking-widest text-sm rounded-full border border-primary/20">
+              <Sparkles className="w-4 h-4" />
+              What Drives Us
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-4">Our Core <span className="text-gradient-vibrant">Values</span></h2>
           </AnimatedSection>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {coreValues.map((value, index) => (
               <AnimatedSection key={value.title} animation="scale" delay={index * 100}>
-                <div className="bg-card rounded-xl p-6 border border-border card-hover group h-full">
-                  <div className="w-12 h-12 bg-gradient-brand rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <value.icon className="w-6 h-6 text-primary-foreground" />
+                <div className="bg-card rounded-xl p-6 border border-border card-hover group h-full relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative z-10">
+                    <div className="w-12 h-12 bg-gradient-brand rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-glow">
+                      <value.icon className="w-6 h-6 text-primary-foreground" />
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-gradient-brand transition-colors">{value.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">{value.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -174,23 +192,29 @@ const About = () => {
         {/* Meet Our Team */}
         <div className="mb-20">
           <AnimatedSection animation="fade-up" className="text-center mb-12">
-            <span className="text-secondary font-semibold uppercase tracking-widest text-sm">Leadership</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-3">Meet Our Core Team</h2>
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/10 text-secondary font-semibold uppercase tracking-widest text-sm rounded-full border border-secondary/20">
+              Leadership
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-4">Meet Our <span className="text-gradient-vibrant">Core Team</span></h2>
           </AnimatedSection>
 
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             {teamMembers.map((member, index) => (
               <AnimatedSection key={member.name} animation="fade-up" delay={index * 150}>
-                <div className="bg-card rounded-2xl overflow-hidden border border-border card-hover group">
-                  <div className="aspect-[4/5] overflow-hidden">
+                <div className="bg-card rounded-2xl overflow-hidden border border-border card-hover group relative">
+                  <div className="aspect-[4/5] overflow-hidden relative">
                     <img 
                       src={member.image} 
                       alt={member.name} 
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
-                  <div className="p-6 text-center">
-                    <h3 className="text-xl font-bold text-foreground mb-1">{member.name}</h3>
+                  <div className="p-6 text-center relative">
+                    <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-gradient-brand rounded-full flex items-center justify-center shadow-glow opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-2">
+                      <Sparkles className="w-5 h-5 text-primary-foreground" />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-gradient-brand transition-colors">{member.name}</h3>
                     <p className="text-secondary font-semibold mb-3">{member.role}</p>
                     <p className="text-muted-foreground text-sm">{member.description}</p>
                   </div>
@@ -203,27 +227,32 @@ const About = () => {
         {/* Testimonials */}
         <div className="mb-20">
           <AnimatedSection animation="fade-up" className="text-center mb-12">
-            <span className="text-secondary font-semibold uppercase tracking-widest text-sm">Testimonials</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-3">What Our Clients Say</h2>
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary font-semibold uppercase tracking-widest text-sm rounded-full border border-primary/20">
+              Testimonials
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-4">What Our <span className="text-gradient-vibrant">Clients Say</span></h2>
           </AnimatedSection>
 
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {testimonials.map((testimonial, index) => (
               <AnimatedSection key={testimonial.author} animation="fade-up" delay={index * 150}>
-                <div className="bg-card rounded-2xl p-8 border border-border card-hover relative">
-                  <Quote className="w-10 h-10 text-secondary/30 absolute top-6 right-6" />
-                  <p className="text-muted-foreground italic mb-6 leading-relaxed relative z-10">
-                    "{testimonial.quote}"
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-brand rounded-full flex items-center justify-center">
-                      <span className="text-primary-foreground font-bold text-lg">
-                        {testimonial.author.charAt(0)}
-                      </span>
-                    </div>
-                    <div>
-                      <p className="font-bold text-foreground">{testimonial.author}</p>
-                      <p className="text-muted-foreground text-sm">Satisfied Client</p>
+                <div className="bg-card rounded-2xl p-8 border border-border card-hover relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <Quote className="w-12 h-12 text-secondary/20 absolute top-6 right-6 group-hover:text-secondary/40 group-hover:scale-110 transition-all" />
+                  <div className="relative z-10">
+                    <p className="text-muted-foreground italic mb-6 leading-relaxed">
+                      "{testimonial.quote}"
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-gradient-brand rounded-full flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform">
+                        <span className="text-primary-foreground font-bold text-lg">
+                          {testimonial.author.charAt(0)}
+                        </span>
+                      </div>
+                      <div>
+                        <p className="font-bold text-foreground group-hover:text-gradient-brand transition-colors">{testimonial.author}</p>
+                        <p className="text-muted-foreground text-sm">Satisfied Client</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -233,7 +262,7 @@ const About = () => {
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-10 md:pt-12 border-t border-border">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-10 md:pt-12 border-t border-border section-divider">
           {[
             { end: 500, suffix: "+", label: "Happy Homeowners" },
             { end: 5, suffix: "+", label: "Years of Excellence" },
@@ -241,13 +270,16 @@ const About = () => {
             { end: 99, suffix: "%", label: "Client Satisfaction" },
           ].map((stat, index) => (
             <AnimatedSection key={stat.label} animation="fade-up" delay={index * 100}>
-              <div className="text-center p-4 md:p-6 bg-card rounded-xl border border-border card-hover group">
-                <CountUpNumber 
-                  end={stat.end} 
-                  suffix={stat.suffix} 
-                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient-brand mb-1 group-hover:scale-105 transition-transform inline-block" 
-                />
-                <div className="text-muted-foreground text-xs md:text-sm">{stat.label}</div>
+              <div className="text-center p-4 md:p-6 bg-card rounded-xl border border-border card-hover group relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10">
+                  <CountUpNumber 
+                    end={stat.end} 
+                    suffix={stat.suffix} 
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient-vibrant mb-1 group-hover:scale-110 transition-transform inline-block" 
+                  />
+                  <div className="text-muted-foreground text-xs md:text-sm">{stat.label}</div>
+                </div>
               </div>
             </AnimatedSection>
           ))}

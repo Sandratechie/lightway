@@ -1,3 +1,4 @@
+import { Sparkles } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import {
   Accordion,
@@ -69,14 +70,22 @@ const faqData = [
 
 const FAQ = () => {
   return (
-    <section className="section-padding bg-muted/30">
-      <div className="container mx-auto container-padding">
+    <section className="section-padding bg-muted/30 relative overflow-hidden">
+      {/* Enhanced Background Effects */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none animate-pulse-glow" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
+      
+      {/* Grid pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+
+      <div className="container mx-auto container-padding relative z-10">
         <AnimatedSection animation="fade-up" className="text-center mb-12">
-          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4 border border-primary/20 animate-border-glow">
+            <Sparkles className="w-4 h-4" />
             Got Questions?
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Frequently Asked Questions
+            Frequently Asked <span className="text-gradient-vibrant">Questions</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Find answers to common questions about our properties, payment plans, and services.
@@ -89,9 +98,9 @@ const FAQ = () => {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-background border border-border rounded-lg px-5 overflow-hidden"
+                className="bg-background border border-border rounded-lg px-5 overflow-hidden card-hover group data-[state=open]:border-secondary/50 data-[state=open]:shadow-glow transition-all duration-300"
               >
-                <AccordionTrigger className="text-left text-sm md:text-base font-semibold py-4 hover:text-primary hover:no-underline [&[data-state=open]]:text-primary">
+                <AccordionTrigger className="text-left text-sm md:text-base font-semibold py-4 hover:text-secondary hover:no-underline [&[data-state=open]]:text-gradient-brand group-hover:text-secondary transition-colors">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground text-sm md:text-base pb-4">
