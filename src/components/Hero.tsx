@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Phone, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CountUpNumber from "@/components/CountUpNumber";
 
@@ -66,51 +66,23 @@ const Hero = () => {
             }`}
           />
         ))}
-        {/* Enhanced Overlay Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-dark/90 via-purple/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-purple-dark/95 via-transparent to-purple-dark/40" />
-        {/* Vibrant color accent overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-transparent to-secondary/30" />
-        {/* Animated shimmer overlay */}
-        <div className="absolute inset-0 animate-shimmer opacity-30" />
-        {/* Animated Grain Effect */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==')]" />
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+        {/* Clean dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate/95 via-slate/80 to-slate/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate/90 via-transparent to-slate/40" />
+        {/* Subtle brand accent */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/10" />
       </div>
-
-      {/* Enhanced Floating Particles Effect */}
-      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute rounded-full animate-float ${
-              i % 3 === 0 ? 'w-2 h-2 bg-secondary/40' : i % 3 === 1 ? 'w-1.5 h-1.5 bg-primary/30' : 'w-1 h-1 bg-primary-foreground/20'
-            }`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${4 + Math.random() * 8}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Glowing orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-secondary/20 rounded-full blur-[150px] animate-pulse-glow pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-primary/20 rounded-full blur-[120px] animate-pulse-glow pointer-events-none" style={{ animationDelay: '1.5s' }} />
 
       {/* Video Navigation Arrows */}
       <button
         onClick={handlePrevVideo}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full glass-vibrant text-primary-foreground hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 group animate-border-glow"
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300 group"
       >
         <ChevronLeft className="w-6 h-6 group-hover:scale-110 transition-transform" />
       </button>
       <button
         onClick={handleNextVideo}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full glass-vibrant text-primary-foreground hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 group animate-border-glow"
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300 group"
       >
         <ChevronRight className="w-6 h-6 group-hover:scale-110 transition-transform" />
       </button>
@@ -123,8 +95,8 @@ const Hero = () => {
             onClick={() => goToVideo(index)}
             className={`h-2 rounded-full transition-all duration-500 ${
               index === currentVideo
-                ? "w-10 bg-gradient-brand shadow-glow"
-                : "w-3 bg-primary-foreground/40 hover:bg-primary-foreground/60 hover:scale-110"
+                ? "w-10 bg-secondary"
+                : "w-3 bg-white/40 hover:bg-white/60 hover:scale-110"
             }`}
           />
         ))}
@@ -137,99 +109,91 @@ const Hero = () => {
         }`}
       >
         <div className="max-w-2xl lg:max-w-3xl">
-          {/* Animated Badge */}
-          <div className="inline-flex items-center gap-2 glass-vibrant rounded-full px-5 py-2.5 mb-6 animate-fade-up animate-border-glow">
-            <Sparkles className="w-4 h-4 text-secondary animate-bounce-subtle" />
-            <span className="text-xs sm:text-sm text-primary-foreground font-medium tracking-wide">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2.5 mb-6 animate-fade-up">
+            <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+            <span className="text-xs sm:text-sm text-white/90 font-medium tracking-wide">
               Excellence • Integrity • Teamwork • Empowerment
             </span>
           </div>
 
-          {/* Headline with enhanced animation */}
+          {/* Headline */}
           <h1 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-bold leading-[1.05] mb-6 animate-fade-up text-shadow-glow" 
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-6 animate-fade-up" 
             style={{ animationDelay: "0.1s" }}
           >
-            <span className="text-primary-foreground">Your Dream Home</span>
+            <span className="text-white">Your Dream Home</span>
             <br />
-            <span className="text-gradient-vibrant">Starts Here</span>
+            <span className="text-secondary">Starts Here</span>
           </h1>
 
           {/* Subheadline */}
           <p 
-            className="text-base sm:text-lg md:text-xl text-primary-foreground/85 max-w-xl mb-8 animate-fade-up leading-relaxed" 
+            className="text-base sm:text-lg md:text-xl text-white/80 max-w-xl mb-8 animate-fade-up leading-relaxed" 
             style={{ animationDelay: "0.2s" }}
           >
             Light Way Homes Ltd offers premium real estate advisory and developmental services, 
             transforming dreams into addresses across Nigeria and Africa.
           </p>
 
-          {/* Enhanced CTAs */}
+          {/* CTAs */}
           <div 
             className="flex flex-col sm:flex-row gap-4 animate-fade-up" 
             style={{ animationDelay: "0.3s" }}
           >
-            <Button variant="hero" size="lg" className="group btn-glow ripple-effect animate-shine">
+            <Button variant="hero" size="lg" className="group">
               View Our Estates
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <a 
               href="tel:+2348038034077"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl glass-vibrant text-primary-foreground hover:bg-secondary/20 transition-all duration-300 font-semibold group animate-border-glow"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300 font-semibold group"
             >
-              <Phone className="w-4 h-4 group-hover:scale-110 group-hover:rotate-12 transition-transform" />
+              <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
               Call Us Now
             </a>
           </div>
 
-          {/* Enhanced Trust Indicators */}
+          {/* Trust Indicators */}
           <div 
-            className="grid grid-cols-3 gap-6 sm:gap-10 mt-12 pt-10 border-t border-primary-foreground/20 animate-fade-up" 
+            className="grid grid-cols-3 gap-6 sm:gap-10 mt-12 pt-10 border-t border-white/20 animate-fade-up" 
             style={{ animationDelay: "0.4s" }}
           >
             <div className="text-center sm:text-left group">
               <CountUpNumber 
                 end={5} 
                 suffix="+" 
-                className="text-3xl sm:text-4xl font-display font-bold text-gradient-vibrant group-hover:scale-110 transition-transform inline-block" 
+                className="text-3xl sm:text-4xl font-display font-bold text-secondary group-hover:scale-110 transition-transform inline-block" 
               />
-              <div className="text-xs sm:text-sm text-primary-foreground/70 mt-1 font-medium">Years Experience</div>
+              <div className="text-xs sm:text-sm text-white/60 mt-1 font-medium">Years Experience</div>
             </div>
             <div className="text-center sm:text-left group">
               <CountUpNumber 
                 end={500} 
                 suffix="+" 
-                className="text-3xl sm:text-4xl font-display font-bold text-gradient-vibrant group-hover:scale-110 transition-transform inline-block" 
+                className="text-3xl sm:text-4xl font-display font-bold text-secondary group-hover:scale-110 transition-transform inline-block" 
               />
-              <div className="text-xs sm:text-sm text-primary-foreground/70 mt-1 font-medium">Happy Clients</div>
+              <div className="text-xs sm:text-sm text-white/60 mt-1 font-medium">Happy Clients</div>
             </div>
             <div className="text-center sm:text-left group">
               <CountUpNumber 
                 end={10} 
                 suffix="+" 
-                className="text-3xl sm:text-4xl font-display font-bold text-gradient-vibrant group-hover:scale-110 transition-transform inline-block" 
+                className="text-3xl sm:text-4xl font-display font-bold text-secondary group-hover:scale-110 transition-transform inline-block" 
               />
-              <div className="text-xs sm:text-sm text-primary-foreground/70 mt-1 font-medium">Estate Projects</div>
+              <div className="text-xs sm:text-sm text-white/60 mt-1 font-medium">Estate Projects</div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Enhanced Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 animate-float z-10">
-        <span className="text-xs text-primary-foreground/60 uppercase tracking-[0.2em] font-medium">Scroll</span>
-        <div className="w-7 h-12 border-2 border-primary-foreground/30 rounded-full flex justify-center pt-2 glass">
-          <div className="w-1.5 h-3 bg-gradient-brand rounded-full animate-bounce" />
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 animate-bounce z-10">
+        <span className="text-xs text-white/50 uppercase tracking-[0.2em] font-medium">Scroll</span>
+        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
+          <div className="w-1 h-2 bg-secondary rounded-full animate-bounce" />
         </div>
       </div>
-
-      {/* Enhanced Corner Accents */}
-      <div className="absolute top-20 right-0 w-80 h-80 bg-secondary/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '2s' }} />
-      
-      {/* Decorative lines */}
-      <div className="absolute top-32 left-8 w-px h-32 bg-gradient-to-b from-transparent via-secondary/30 to-transparent hidden lg:block" />
-      <div className="absolute bottom-32 right-8 w-px h-32 bg-gradient-to-b from-transparent via-secondary/30 to-transparent hidden lg:block" />
     </section>
   );
 };
