@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import logoDark from "@/assets/logo-dark.png";
 
 interface SubLink {
   name: string;
@@ -136,14 +137,14 @@ const Header = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'bg-background/95 backdrop-blur-xl shadow-elevated border-b border-secondary/10' 
-          : 'bg-gradient-to-b from-background/80 to-transparent backdrop-blur-sm'
+          ? 'bg-slate-900/98 backdrop-blur-xl shadow-2xl border-b border-white/10' 
+          : 'bg-slate-900/90 backdrop-blur-md'
       } ${hideNav ? '-translate-y-full' : 'translate-y-0'} ${
         isVisible ? 'opacity-100' : 'opacity-0 -translate-y-4'
       }`}
     >
       {/* Top bar with gradient accent */}
-      <div className="h-1 w-full bg-gradient-brand" />
+      <div className="h-1 w-full bg-gradient-to-r from-secondary via-primary to-secondary" />
       
       <div className="container mx-auto container-padding">
         <div className="flex items-center justify-between h-18 md:h-20">
@@ -154,14 +155,12 @@ const Header = () => {
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
             }`}
           >
-            <div className="relative">
+            <div className="relative logo-glow">
               <img 
                 src={logo} 
                 alt="Light Way Homes" 
                 className={`transition-all duration-500 group-hover:scale-105 ${isScrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'}`}
               />
-              {/* Logo glow effect on hover */}
-              <div className="absolute inset-0 bg-secondary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
           </Link>
 
@@ -177,11 +176,11 @@ const Header = () => {
                 {link.subLinks ? (
                   <>
                     <button
-                      className={`nav-link-animated px-4 py-2 text-sm font-medium transition-all duration-300 flex items-center gap-1 rounded-lg ${
-                        isScrolled ? 'text-foreground' : 'text-foreground'
-                      } ${isActiveRoute(link.href) ? 'text-secondary' : ''} ${
+                      className={`nav-link-animated px-4 py-2 text-sm font-medium transition-all duration-300 flex items-center gap-1 rounded-lg text-white/90 hover:text-white ${
+                        isActiveRoute(link.href) ? 'text-secondary' : ''
+                      } ${
                         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-                      } hover:text-secondary group`}
+                      } group`}
                       style={{ transitionDelay: `${(index + 1) * 80}ms` }}
                     >
                       {link.name}
@@ -198,31 +197,31 @@ const Header = () => {
                           : 'opacity-0 -translate-y-2 pointer-events-none'
                       }`}
                     >
-                      <div className="bg-card/98 backdrop-blur-xl rounded-xl shadow-elevated border border-secondary/10 overflow-hidden min-w-[280px]">
+                      <div className="bg-slate-900/98 backdrop-blur-xl rounded-xl shadow-2xl border border-white/10 overflow-hidden min-w-[280px]">
                         {/* Dropdown header gradient */}
-                        <div className="h-1 bg-gradient-brand" />
+                        <div className="h-1 bg-gradient-to-r from-secondary via-primary to-secondary" />
                         <div className="p-2">
                           {link.subLinks.map((subLink, subIndex) => (
                             <Link
                               key={subLink.name}
                               to={subLink.href}
                               onClick={() => handleNavClick(subLink.href, true)}
-                              className="group flex items-start gap-3 p-3 rounded-lg hover:bg-secondary/5 transition-all duration-300"
+                              className="dropdown-item group flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-all duration-300"
                               style={{ 
                                 opacity: activeDropdown === link.name ? 1 : 0,
                                 transform: activeDropdown === link.name ? 'translateX(0)' : 'translateX(-10px)',
                                 transition: `all 0.3s ease ${subIndex * 50}ms`
                               }}
                             >
-                              <div className="w-8 h-8 rounded-lg bg-gradient-brand flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                <ArrowRight className="w-4 h-4 text-primary-foreground" />
+                              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary to-primary flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-secondary/30 transition-all duration-300">
+                                <ArrowRight className="w-4 h-4 text-white" />
                               </div>
                               <div>
-                                <span className="block font-medium text-foreground group-hover:text-secondary transition-colors duration-300">
+                                <span className="block font-medium text-white group-hover:text-secondary transition-colors duration-300">
                                   {subLink.name}
                                 </span>
                                 {subLink.description && (
-                                  <span className="text-xs text-muted-foreground">
+                                  <span className="text-xs text-white/50">
                                     {subLink.description}
                                   </span>
                                 )}
@@ -237,11 +236,11 @@ const Header = () => {
                   <Link
                     to={link.href}
                     onClick={() => handleNavClick(link.href, link.isRoute)}
-                    className={`nav-link-animated px-4 py-2 text-sm font-medium transition-all duration-300 relative rounded-lg block ${
-                      isScrolled ? 'text-foreground' : 'text-foreground'
-                    } ${isActiveRoute(link.href) ? 'text-secondary' : ''} ${
+                    className={`nav-link-animated px-4 py-2 text-sm font-medium transition-all duration-300 relative rounded-lg block text-white/90 hover:text-white ${
+                      isActiveRoute(link.href) ? 'text-secondary' : ''
+                    } ${
                       isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-                    } hover:text-secondary`}
+                    }`}
                     style={{ transitionDelay: `${(index + 1) * 80}ms` }}
                   >
                     {link.name}
@@ -249,7 +248,7 @@ const Header = () => {
                     <span className="nav-underline" />
                     {/* Active indicator */}
                     {isActiveRoute(link.href) && (
-                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-secondary animate-pulse-glow" />
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-secondary shadow-lg shadow-secondary/50 animate-pulse-glow" />
                     )}
                   </Link>
                 )}
@@ -266,28 +265,27 @@ const Header = () => {
           >
             <a 
               href="tel:+2348038034077" 
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-secondary transition-all duration-300 group"
+              className="flex items-center gap-2 text-sm text-white/70 hover:text-secondary transition-all duration-300 group phone-ring"
             >
-              <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 group-hover:scale-110 transition-all duration-300">
+              <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-secondary/20 group-hover:scale-110 transition-all duration-300 border border-white/10">
                 <Phone className="w-4 h-4 text-secondary" />
               </div>
-              <span className="hidden xl:inline">+234 803 803 4077</span>
+              <span className="hidden xl:inline font-medium">+234 803 803 4077</span>
             </a>
             <Button 
               variant="hero" 
               size="default" 
-              className="btn-glow relative overflow-hidden group"
+              className="btn-glow btn-cta-shine relative overflow-hidden group bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-secondary border-0 shadow-lg shadow-secondary/25"
             >
-              <span className="relative z-10">Get Started</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <span className="relative z-10 font-semibold">Get Started</span>
             </Button>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button
-            className={`lg:hidden p-2 rounded-lg transition-all duration-300 ${
-              isScrolled ? 'text-foreground' : 'text-foreground'
-            } ${isVisible ? 'opacity-100' : 'opacity-0'} hover:bg-secondary/10`}
+            className={`lg:hidden p-2 rounded-lg transition-all duration-300 text-white ${
+              isVisible ? 'opacity-100' : 'opacity-0'
+            } hover:bg-white/10`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -302,7 +300,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div 
-        className={`lg:hidden fixed inset-0 top-[73px] bg-background/98 backdrop-blur-xl transition-all duration-500 ${
+        className={`lg:hidden fixed inset-0 top-[73px] bg-slate-900/98 backdrop-blur-xl transition-all duration-500 ${
           isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -319,7 +317,7 @@ const Header = () => {
                 <div>
                   <button
                     onClick={() => setMobileSubmenu(mobileSubmenu === link.name ? null : link.name)}
-                    className="flex items-center justify-between w-full py-4 text-lg font-medium text-foreground hover:text-secondary transition-colors border-b border-border/50"
+                    className="flex items-center justify-between w-full py-4 text-lg font-medium text-white hover:text-secondary transition-colors border-b border-white/10"
                   >
                     {link.name}
                     <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${mobileSubmenu === link.name ? 'rotate-180' : ''}`} />
@@ -333,10 +331,10 @@ const Header = () => {
                           key={subLink.name}
                           to={subLink.href}
                           onClick={() => handleNavClick(subLink.href, true)}
-                          className="flex items-center gap-3 py-3 text-muted-foreground hover:text-secondary transition-colors"
+                          className="flex items-center gap-3 py-3 text-white/70 hover:text-secondary transition-colors"
                         >
-                          <div className="w-6 h-6 rounded bg-gradient-brand flex items-center justify-center">
-                            <ArrowRight className="w-3 h-3 text-primary-foreground" />
+                          <div className="w-6 h-6 rounded bg-gradient-to-br from-secondary to-primary flex items-center justify-center">
+                            <ArrowRight className="w-3 h-3 text-white" />
                           </div>
                           {subLink.name}
                         </Link>
@@ -348,8 +346,8 @@ const Header = () => {
                 <Link
                   to={link.href}
                   onClick={() => handleNavClick(link.href, link.isRoute)}
-                  className={`block py-4 text-lg font-medium border-b border-border/50 transition-colors ${
-                    isActiveRoute(link.href) ? 'text-secondary' : 'text-foreground hover:text-secondary'
+                  className={`block py-4 text-lg font-medium border-b border-white/10 transition-colors ${
+                    isActiveRoute(link.href) ? 'text-secondary' : 'text-white hover:text-secondary'
                   }`}
                 >
                   {link.name}
@@ -360,24 +358,28 @@ const Header = () => {
           
           {/* Mobile CTA Section */}
           <div 
-            className={`mt-auto pt-6 border-t border-border transition-all duration-500 ${
+            className={`mt-auto pt-6 border-t border-white/10 transition-all duration-500 ${
               isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
             style={{ transitionDelay: '400ms' }}
           >
             <a 
               href="tel:+2348038034077" 
-              className="flex items-center gap-3 py-3 text-muted-foreground"
+              className="flex items-center gap-3 py-3 text-white/70"
             >
-              <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/10">
                 <Phone className="w-5 h-5 text-secondary" />
               </div>
               <div>
-                <span className="text-xs text-muted-foreground">Call us now</span>
-                <span className="block font-medium text-foreground">+234 803 803 4077</span>
+                <span className="text-xs text-white/50">Call us now</span>
+                <span className="block font-medium text-white">+234 803 803 4077</span>
               </div>
             </a>
-            <Button variant="hero" size="lg" className="w-full mt-4 btn-glow">
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="w-full mt-4 btn-glow bg-gradient-to-r from-secondary to-primary border-0 shadow-lg shadow-secondary/25"
+            >
               Get Started
             </Button>
           </div>
