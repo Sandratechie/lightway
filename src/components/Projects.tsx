@@ -23,16 +23,14 @@ const projectDisplayData = [
 const Projects = () => {
   return (
     <section id="projects" className="section-padding bg-muted relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
-
       <div className="container mx-auto container-padding relative z-10">
         {/* Section Header */}
         <AnimatedSection className="text-center max-w-2xl mx-auto mb-10 md:mb-16">
-          <span className="inline-block text-secondary font-semibold uppercase tracking-widest text-xs md:text-sm mb-3">Our Portfolio</span>
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary font-semibold uppercase tracking-widest text-xs md:text-sm mb-4 rounded-full">
+            Our Portfolio
+          </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-foreground">
-            Premium <span className="text-gradient-brand">Estates</span> For You
+            Premium <span className="text-secondary">Estates</span> For You
           </h2>
           <p className="text-muted-foreground text-sm md:text-base">
             Discover our collection of carefully developed estates across Nigeria, 
@@ -49,24 +47,24 @@ const Projects = () => {
               delay={index * 150}
             >
               <Link to={`/properties?project=${project.slug}`} className="block h-full">
-                <div className="group bg-card rounded-xl overflow-hidden shadow-card card-hover border border-border h-full">
+                <div className="group bg-card rounded-xl overflow-hidden shadow-card hover:shadow-elevated border border-border h-full transition-all duration-300 hover:-translate-y-1">
                   {/* Image */}
                   <div className="relative h-48 sm:h-52 md:h-60 overflow-hidden">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover img-zoom"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate/80 via-slate/30 to-transparent" />
                     
                     {/* Status Badge */}
                     <div className="absolute top-3 left-3">
-                      <span className={`px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm ${
+                      <span className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
                         project.status === "Now Selling" 
-                          ? "bg-secondary/90 text-secondary-foreground" 
+                          ? "bg-secondary text-white" 
                           : project.status === "Coming Soon"
-                          ? "bg-foreground/70 text-background"
-                          : "bg-primary/90 text-primary-foreground"
+                          ? "bg-slate text-white"
+                          : "bg-primary text-white"
                       }`}>
                         {project.status}
                       </span>
@@ -74,12 +72,12 @@ const Projects = () => {
 
                     {/* Price overlay */}
                     <div className="absolute bottom-3 left-3">
-                      <span className="text-xl md:text-2xl font-bold text-primary-foreground drop-shadow-lg">{project.price}</span>
+                      <span className="text-xl md:text-2xl font-bold text-white drop-shadow-lg">{project.price}</span>
                     </div>
 
                     {/* Arrow */}
-                    <div className="absolute top-3 right-3 w-9 h-9 bg-primary-foreground/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-secondary group-hover:scale-110">
-                      <ArrowUpRight className="w-4 h-4 text-primary-foreground" />
+                    <div className="absolute top-3 right-3 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <ArrowUpRight className="w-4 h-4 text-white" />
                     </div>
                   </div>
 
@@ -105,7 +103,7 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    <Button variant="outline" size="sm" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground group/btn">
+                    <Button variant="outline" size="sm" className="w-full group/btn">
                       View Details
                       <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                     </Button>
@@ -119,9 +117,9 @@ const Projects = () => {
         {/* View All CTA */}
         <AnimatedSection className="text-center mt-10 md:mt-12" delay={450}>
           <Link to="/properties">
-            <Button variant="hero" size="lg" className="shadow-lg shadow-secondary/20">
+            <Button variant="hero" size="lg" className="group">
               View All Properties
-              <ArrowUpRight className="w-5 h-5" />
+              <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </Button>
           </Link>
         </AnimatedSection>
