@@ -782,6 +782,16 @@
   }
 }
 
+/* Video progress bar animation */
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 .nav-indicator-active {
   animation: nav-indicator-pulse 2s ease-in-out infinite;
 }
