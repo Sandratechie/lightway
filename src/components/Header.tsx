@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, ChevronDown, ArrowRight } from "lucide-react";
+import { Phone, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
-import logoDark from "@/assets/logo-dark.png";
 
 interface SubLink {
   name: string;
@@ -26,7 +25,10 @@ const Header = () => {
   const [hideNav, setHideNav] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const highlightRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   // Initial load animation
@@ -38,12 +40,9 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 30);
       
-      // Update scrolled state for background
-      setIsScrolled(currentScrollY > 50);
-      
-      // Hide/show navbar on scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 150) {
+      if (currentScrollY > lastScrollY && currentScrollY > 200) {
         setHideNav(true);
       } else {
         setHideNav(false);
@@ -68,7 +67,7 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Handle hash navigation when coming from another page
+  // Handle hash navigation
   useEffect(() => {
     if (location.hash) {
       const element = document.querySelector(location.hash);
@@ -85,6 +84,28 @@ const Header = () => {
     setIsMenuOpen(false);
     setMobileSubmenu(null);
   }, [location.pathname]);
+
+  // Moving highlight effect
+  const moveHighlight = (index: number) => {
+    const navItems = navRef.current?.querySelectorAll('.nav-item');
+    const highlight = highlightRef.current;
+    
+    if (navItems && highlight && navItems[index]) {
+      const item = navItems[index] as HTMLElement;
+      const rect = item.getBoundingClientRect();
+      const navRect = navRef.current!.getBoundingClientRect();
+      
+      highlight.style.width = `${rect.width}px`;
+      highlight.style.left = `${rect.left - navRect.left}px`;
+      highlight.style.opacity = '1';
+    }
+  };
+
+  const resetHighlight = () => {
+    if (highlightRef.current) {
+      highlightRef.current.style.opacity = '0';
+    }
+  };
 
   const navLinks: NavItem[] = [
     { name: "Home", href: "/", isRoute: true },
@@ -118,7 +139,6 @@ const Header = () => {
     setIsMenuOpen(false);
     setActiveDropdown(null);
     
-    // If it's a hash link and we're on the home page, scroll to the section
     if (!isRoute && href.startsWith('/#') && location.pathname === '/') {
       const hash = href.replace('/', '');
       const element = document.querySelector(hash);
@@ -135,208 +155,263 @@ const Header = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-slate-900/98 backdrop-blur-xl shadow-2xl border-b border-white/10' 
-          : 'bg-slate-900/90 backdrop-blur-md'
-      } ${hideNav ? '-translate-y-full' : 'translate-y-0'} ${
-        isVisible ? 'opacity-100' : 'opacity-0 -translate-y-4'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
+        hideNav ? '-translate-y-full' : 'translate-y-0'
+      } ${isVisible ? 'opacity-100' : 'opacity-0 -translate-y-4'}`}
     >
-      {/* Top bar with gradient accent */}
-      <div className="h-1 w-full bg-gradient-to-r from-secondary via-primary to-secondary" />
-      
-      <div className="container mx-auto container-padding">
-        <div className="flex items-center justify-between h-18 md:h-20">
-          {/* Logo */}
-          <Link 
-            to="/" 
-            className={`flex items-center group transition-all duration-500 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-            }`}
-          >
-            <div className="relative logo-glow">
-              <img 
-                src={logo} 
-                alt="Light Way Homes" 
-                className={`transition-all duration-500 group-hover:scale-105 ${isScrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'}`}
-              />
-            </div>
-          </Link>
+      {/* Premium glass navbar container */}
+      <div className={`transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-[#0a0a0f]/95 backdrop-blur-2xl shadow-[0_4px_30px_rgba(0,0,0,0.4)] border-b border-white/[0.08]' 
+          : 'bg-[#0a0a0f]/80 backdrop-blur-xl'
+      }`}>
+        {/* Top accent line */}
+        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-secondary to-transparent opacity-80" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20 lg:h-24">
+            {/* Logo */}
+            <Link 
+              to="/" 
+              className={`flex items-center group transition-all duration-700 ${
+                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+              }`}
+            >
+              <div className="relative">
+                <img 
+                  src={logo} 
+                  alt="Light Way Homes" 
+                  className={`transition-all duration-500 group-hover:brightness-110 ${
+                    isScrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'
+                  }`}
+                />
+                {/* Subtle glow on hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-secondary/20 -z-10" />
+              </div>
+            </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2" ref={dropdownRef}>
-            {navLinks.map((link, index) => (
+            {/* Desktop Navigation */}
+            <nav 
+              className="hidden lg:flex items-center relative" 
+              ref={navRef}
+              onMouseLeave={resetHighlight}
+            >
+              {/* Moving highlight background */}
               <div 
-                key={link.name}
-                className="relative"
-                onMouseEnter={() => link.subLinks && setActiveDropdown(link.name)}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                {link.subLinks ? (
-                  <>
-                    <button
-                      className={`nav-link-animated px-4 py-2 text-sm font-medium transition-all duration-300 flex items-center gap-1 rounded-lg text-white/90 hover:text-white ${
-                        isActiveRoute(link.href) ? 'text-secondary' : ''
-                      } ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-                      } group`}
-                      style={{ transitionDelay: `${(index + 1) * 80}ms` }}
-                    >
-                      {link.name}
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === link.name ? 'rotate-180' : ''}`} />
-                      {/* Animated underline from center */}
-                      <span className="nav-underline" />
-                    </button>
-                    
-                    {/* Dropdown Menu */}
-                    <div 
-                      className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ${
-                        activeDropdown === link.name 
-                          ? 'opacity-100 translate-y-0 pointer-events-auto' 
-                          : 'opacity-0 -translate-y-2 pointer-events-none'
-                      }`}
-                    >
-                      <div className="bg-slate-900/98 backdrop-blur-xl rounded-xl shadow-2xl border border-white/10 overflow-hidden min-w-[280px]">
-                        {/* Dropdown header gradient */}
-                        <div className="h-1 bg-gradient-to-r from-secondary via-primary to-secondary" />
-                        <div className="p-2">
-                          {link.subLinks.map((subLink, subIndex) => (
-                            <Link
-                              key={subLink.name}
-                              to={subLink.href}
-                              onClick={() => handleNavClick(subLink.href, true)}
-                              className="dropdown-item group flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-all duration-300"
-                              style={{ 
-                                opacity: activeDropdown === link.name ? 1 : 0,
-                                transform: activeDropdown === link.name ? 'translateX(0)' : 'translateX(-10px)',
-                                transition: `all 0.3s ease ${subIndex * 50}ms`
-                              }}
-                            >
-                              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary to-primary flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-secondary/30 transition-all duration-300">
-                                <ArrowRight className="w-4 h-4 text-white" />
-                              </div>
-                              <div>
-                                <span className="block font-medium text-white group-hover:text-secondary transition-colors duration-300">
-                                  {subLink.name}
-                                </span>
-                                {subLink.description && (
-                                  <span className="text-xs text-white/50">
-                                    {subLink.description}
-                                  </span>
-                                )}
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <Link
-                    to={link.href}
-                    onClick={() => handleNavClick(link.href, link.isRoute)}
-                    className={`nav-link-animated px-4 py-2 text-sm font-medium transition-all duration-300 relative rounded-lg block text-white/90 hover:text-white ${
-                      isActiveRoute(link.href) ? 'text-secondary' : ''
-                    } ${
-                      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-                    }`}
-                    style={{ transitionDelay: `${(index + 1) * 80}ms` }}
+                ref={highlightRef}
+                className="absolute top-1/2 -translate-y-1/2 h-10 bg-white/[0.08] rounded-lg transition-all duration-300 ease-out opacity-0 pointer-events-none"
+                style={{ transform: 'translateY(-50%)' }}
+              />
+              
+              <div className="flex items-center" ref={dropdownRef}>
+                {navLinks.map((link, index) => (
+                  <div 
+                    key={link.name}
+                    className="relative nav-item"
+                    onMouseEnter={() => {
+                      moveHighlight(index);
+                      setActiveIndex(index);
+                      if (link.subLinks) setActiveDropdown(link.name);
+                    }}
+                    onMouseLeave={() => {
+                      if (!link.subLinks) resetHighlight();
+                      setActiveDropdown(null);
+                    }}
                   >
-                    {link.name}
-                    {/* Animated underline from center */}
-                    <span className="nav-underline" />
-                    {/* Active indicator */}
-                    {isActiveRoute(link.href) && (
-                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-secondary shadow-lg shadow-secondary/50 animate-pulse-glow" />
+                    {link.subLinks ? (
+                      <>
+                        <button
+                          className={`relative px-5 py-3 text-[13px] font-medium tracking-wide uppercase transition-all duration-300 flex items-center gap-1.5 ${
+                            isActiveRoute(link.href) 
+                              ? 'text-secondary' 
+                              : 'text-white/80 hover:text-white'
+                          } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
+                          style={{ transitionDelay: `${(index + 1) * 60}ms` }}
+                        >
+                          <span className="relative z-10">{link.name}</span>
+                          <ChevronDown 
+                            className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                              activeDropdown === link.name ? 'rotate-180' : ''
+                            }`} 
+                          />
+                          {/* Active indicator dot */}
+                          {isActiveRoute(link.href) && (
+                            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-secondary" />
+                          )}
+                        </button>
+                        
+                        {/* Premium Dropdown Menu */}
+                        <div 
+                          className={`absolute top-full left-1/2 pt-5 transition-all duration-400 ${
+                            activeDropdown === link.name 
+                              ? 'opacity-100 translate-y-0 pointer-events-auto' 
+                              : 'opacity-0 -translate-y-3 pointer-events-none'
+                          }`}
+                          style={{ transform: activeDropdown === link.name ? 'translateX(-50%)' : 'translateX(-50%) translateY(-12px)' }}
+                        >
+                          <div className="relative bg-[#0f0f16]/98 backdrop-blur-2xl rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/[0.08] overflow-hidden min-w-[300px]">
+                            {/* Top gradient accent */}
+                            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-secondary/60 to-transparent" />
+                            
+                            {/* Glow effect */}
+                            <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-40 h-40 bg-secondary/10 rounded-full blur-3xl pointer-events-none" />
+                            
+                            <div className="relative p-3">
+                              {link.subLinks.map((subLink, subIndex) => (
+                                <Link
+                                  key={subLink.name}
+                                  to={subLink.href}
+                                  onClick={() => handleNavClick(subLink.href, true)}
+                                  className="group flex items-start gap-4 p-4 rounded-xl hover:bg-white/[0.04] transition-all duration-300"
+                                  style={{ 
+                                    opacity: activeDropdown === link.name ? 1 : 0,
+                                    transform: activeDropdown === link.name ? 'translateY(0)' : 'translateY(-8px)',
+                                    transition: `all 0.35s cubic-bezier(0.4, 0, 0.2, 1) ${subIndex * 40 + 80}ms`
+                                  }}
+                                >
+                                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center flex-shrink-0 group-hover:from-secondary/30 group-hover:to-primary/30 group-hover:scale-105 transition-all duration-300 border border-white/[0.08]">
+                                    <ArrowRight className="w-4 h-4 text-secondary transition-transform duration-300 group-hover:translate-x-0.5" />
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <span className="block font-medium text-white/90 group-hover:text-white transition-colors duration-300 text-sm">
+                                      {subLink.name}
+                                    </span>
+                                    {subLink.description && (
+                                      <span className="text-xs text-white/40 mt-1 block">
+                                        {subLink.description}
+                                      </span>
+                                    )}
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        onClick={() => handleNavClick(link.href, link.isRoute)}
+                        className={`relative px-5 py-3 text-[13px] font-medium tracking-wide uppercase transition-all duration-300 block ${
+                          isActiveRoute(link.href) 
+                            ? 'text-secondary' 
+                            : 'text-white/80 hover:text-white'
+                        } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
+                        style={{ transitionDelay: `${(index + 1) * 60}ms` }}
+                      >
+                        <span className="relative z-10">{link.name}</span>
+                        {/* Active indicator dot */}
+                        {isActiveRoute(link.href) && (
+                          <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-secondary" />
+                        )}
+                      </Link>
                     )}
-                  </Link>
-                )}
+                  </div>
+                ))}
               </div>
-            ))}
-          </nav>
+            </nav>
 
-          {/* CTA & Phone */}
-          <div 
-            className={`hidden lg:flex items-center gap-4 transition-all duration-500 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-            }`}
-            style={{ transitionDelay: '500ms' }}
-          >
-            <a 
-              href="tel:+2348038034077" 
-              className="flex items-center gap-2 text-sm text-white/70 hover:text-secondary transition-all duration-300 group phone-ring"
+            {/* CTA & Phone */}
+            <div 
+              className={`hidden lg:flex items-center gap-5 transition-all duration-700 ${
+                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+              }`}
+              style={{ transitionDelay: '400ms' }}
             >
-              <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-secondary/20 group-hover:scale-110 transition-all duration-300 border border-white/10">
-                <Phone className="w-4 h-4 text-secondary" />
-              </div>
-              <span className="hidden xl:inline font-medium">+234 803 803 4077</span>
-            </a>
-            <Button 
-              variant="hero" 
-              size="default" 
-              className="btn-glow btn-cta-shine relative overflow-hidden group bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-secondary border-0 shadow-lg shadow-secondary/25"
-            >
-              <span className="relative z-10 font-semibold">Get Started</span>
-            </Button>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            className={`lg:hidden p-2 rounded-lg transition-all duration-300 text-white ${
-              isVisible ? 'opacity-100' : 'opacity-0'
-            } hover:bg-white/10`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <div className="relative w-6 h-6">
-              <span className={`absolute left-0 w-6 h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? 'top-3 rotate-45' : 'top-1'}`} />
-              <span className={`absolute left-0 top-3 w-6 h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? 'opacity-0 scale-0' : 'opacity-100'}`} />
-              <span className={`absolute left-0 w-6 h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? 'top-3 -rotate-45' : 'top-5'}`} />
+              <a 
+                href="tel:+2348038034077" 
+                className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-all duration-300 group"
+              >
+                <div className="w-10 h-10 rounded-full bg-white/[0.06] flex items-center justify-center group-hover:bg-secondary/20 group-hover:scale-105 transition-all duration-300 border border-white/[0.08]">
+                  <Phone className="w-4 h-4 text-secondary" />
+                </div>
+                <span className="hidden xl:inline font-medium tracking-wide">+234 803 803 4077</span>
+              </a>
+              
+              <Button 
+                variant="default" 
+                size="default" 
+                className="relative overflow-hidden bg-gradient-to-r from-secondary via-secondary to-primary hover:from-primary hover:via-secondary hover:to-secondary border-0 shadow-[0_0_20px_rgba(218,28,92,0.3)] hover:shadow-[0_0_30px_rgba(218,28,92,0.5)] transition-all duration-500 px-6 font-semibold tracking-wide text-[13px] uppercase"
+              >
+                <span className="relative z-10">Get Started</span>
+                {/* Shine effect */}
+                <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-200%] hover:translate-x-[200%] transition-transform duration-700" />
+                </div>
+              </Button>
             </div>
-          </button>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              className={`lg:hidden p-3 rounded-xl transition-all duration-300 text-white ${
+                isVisible ? 'opacity-100' : 'opacity-0'
+              } hover:bg-white/[0.06] active:scale-95`}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <div className="relative w-6 h-5">
+                <span className={`absolute left-0 w-6 h-[2px] bg-current rounded-full transition-all duration-400 ease-out ${
+                  isMenuOpen ? 'top-2.5 rotate-45 bg-secondary' : 'top-0'
+                }`} />
+                <span className={`absolute left-0 top-2.5 w-6 h-[2px] bg-current rounded-full transition-all duration-300 ${
+                  isMenuOpen ? 'opacity-0 scale-x-0' : 'opacity-100'
+                }`} />
+                <span className={`absolute left-0 w-6 h-[2px] bg-current rounded-full transition-all duration-400 ease-out ${
+                  isMenuOpen ? 'top-2.5 -rotate-45 bg-secondary' : 'top-5'
+                }`} />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
       <div 
-        className={`lg:hidden fixed inset-0 top-[73px] bg-slate-900/98 backdrop-blur-xl transition-all duration-500 ${
+        className={`lg:hidden fixed inset-x-0 top-[82px] bottom-0 bg-[#0a0a0f]/98 backdrop-blur-2xl transition-all duration-500 ${
           isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <nav className="container mx-auto container-padding py-8 flex flex-col gap-2 h-[calc(100vh-73px)] overflow-y-auto">
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary/5 to-transparent pointer-events-none" />
+        
+        <nav className="container mx-auto px-6 py-8 flex flex-col gap-1 h-full overflow-y-auto relative">
           {navLinks.map((link, index) => (
             <div 
               key={link.name}
-              className={`transition-all duration-500 ${
+              className={`transition-all duration-600 ${
                 isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
               }`}
-              style={{ transitionDelay: `${index * 80}ms` }}
+              style={{ transitionDelay: `${index * 60 + 100}ms` }}
             >
               {link.subLinks ? (
                 <div>
                   <button
                     onClick={() => setMobileSubmenu(mobileSubmenu === link.name ? null : link.name)}
-                    className="flex items-center justify-between w-full py-4 text-lg font-medium text-white hover:text-secondary transition-colors border-b border-white/10"
+                    className="flex items-center justify-between w-full py-4 text-lg font-medium text-white hover:text-secondary transition-colors border-b border-white/[0.06]"
                   >
-                    {link.name}
-                    <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${mobileSubmenu === link.name ? 'rotate-180' : ''}`} />
+                    <span className="tracking-wide">{link.name}</span>
+                    <ChevronDown className={`w-5 h-5 transition-transform duration-400 ${
+                      mobileSubmenu === link.name ? 'rotate-180 text-secondary' : ''
+                    }`} />
                   </button>
-                  <div className={`overflow-hidden transition-all duration-500 ${
-                    mobileSubmenu === link.name ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+                  <div className={`overflow-hidden transition-all duration-500 ease-out ${
+                    mobileSubmenu === link.name ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
                   }`}>
-                    <div className="py-2 pl-4 space-y-1">
-                      {link.subLinks.map((subLink) => (
+                    <div className="py-3 pl-4 space-y-1 bg-white/[0.02] rounded-b-xl">
+                      {link.subLinks.map((subLink, subIndex) => (
                         <Link
                           key={subLink.name}
                           to={subLink.href}
                           onClick={() => handleNavClick(subLink.href, true)}
-                          className="flex items-center gap-3 py-3 text-white/70 hover:text-secondary transition-colors"
+                          className="flex items-center gap-3 py-3.5 px-3 text-white/70 hover:text-secondary hover:bg-white/[0.03] rounded-lg transition-all duration-300"
+                          style={{
+                            transitionDelay: mobileSubmenu === link.name ? `${subIndex * 50}ms` : '0ms'
+                          }}
                         >
-                          <div className="w-6 h-6 rounded bg-gradient-to-br from-secondary to-primary flex items-center justify-center">
-                            <ArrowRight className="w-3 h-3 text-white" />
+                          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center border border-white/[0.06]">
+                            <ArrowRight className="w-3 h-3 text-secondary" />
                           </div>
-                          {subLink.name}
+                          <span className="font-medium">{subLink.name}</span>
                         </Link>
                       ))}
                     </div>
@@ -346,7 +421,7 @@ const Header = () => {
                 <Link
                   to={link.href}
                   onClick={() => handleNavClick(link.href, link.isRoute)}
-                  className={`block py-4 text-lg font-medium border-b border-white/10 transition-colors ${
+                  className={`block py-4 text-lg font-medium border-b border-white/[0.06] transition-colors tracking-wide ${
                     isActiveRoute(link.href) ? 'text-secondary' : 'text-white hover:text-secondary'
                   }`}
                 >
@@ -358,27 +433,27 @@ const Header = () => {
           
           {/* Mobile CTA Section */}
           <div 
-            className={`mt-auto pt-6 border-t border-white/10 transition-all duration-500 ${
+            className={`mt-auto pt-8 border-t border-white/[0.06] transition-all duration-600 ${
               isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
-            style={{ transitionDelay: '400ms' }}
+            style={{ transitionDelay: '450ms' }}
           >
             <a 
               href="tel:+2348038034077" 
-              className="flex items-center gap-3 py-3 text-white/70"
+              className="flex items-center gap-4 py-4 text-white/70 hover:text-white transition-colors"
             >
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/10">
+              <div className="w-12 h-12 rounded-xl bg-white/[0.06] flex items-center justify-center border border-white/[0.08]">
                 <Phone className="w-5 h-5 text-secondary" />
               </div>
               <div>
-                <span className="text-xs text-white/50">Call us now</span>
-                <span className="block font-medium text-white">+234 803 803 4077</span>
+                <span className="text-xs text-white/40 tracking-wide uppercase">Call us now</span>
+                <span className="block font-semibold text-white mt-0.5">+234 803 803 4077</span>
               </div>
             </a>
             <Button 
-              variant="hero" 
+              variant="default" 
               size="lg" 
-              className="w-full mt-4 btn-glow bg-gradient-to-r from-secondary to-primary border-0 shadow-lg shadow-secondary/25"
+              className="w-full mt-4 bg-gradient-to-r from-secondary to-primary border-0 shadow-[0_0_30px_rgba(218,28,92,0.3)] font-semibold tracking-wide uppercase"
             >
               Get Started
             </Button>
