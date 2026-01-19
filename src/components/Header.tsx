@@ -203,7 +203,14 @@ const Header = () => {
                 style={{ transform: 'translateY(-50%)' }}
               />
               
-              <div className="flex items-center" ref={dropdownRef}>
+              <div
+                className="flex items-center"
+                ref={dropdownRef}
+                onMouseLeave={() => {
+                  setActiveDropdown(null);
+                  resetHighlight();
+                }}
+              >
                 {navLinks.map((link, index) => (
                   <div 
                     key={link.name}
@@ -213,15 +220,16 @@ const Header = () => {
                       setActiveIndex(index);
                       if (link.subLinks) setActiveDropdown(link.name);
                     }}
-                    onMouseLeave={() => {
-                      if (!link.subLinks) resetHighlight();
-                      setActiveDropdown(null);
-                    }}
                   >
                     {link.subLinks ? (
                       <>
                         <button
-                          className={`relative px-5 py-3 text-[13px] font-medium tracking-wide uppercase transition-all duration-300 flex items-center gap-1.5 ${
+                          type="button"
+                          onClick={() =>
+                            setActiveDropdown((prev) => (prev === link.name ? null : link.name))
+                          }
+                          aria-expanded={activeDropdown === link.name}
+                          className={`relative px-5 py-3 text-[13px] font-medium tracking-wide uppercase transition-all duration-300 flex items-center gap-1.5 cursor-pointer select-none touch-manipulation ${
                             isActiveRoute(link.href) 
                               ? 'text-secondary' 
                               : 'text-white/80 hover:text-white'
