@@ -397,41 +397,60 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div 
-          className="lg:hidden fixed inset-0 bg-black/50 z-30"
-          onClick={() => setIsMenuOpen(false)}
-          aria-hidden="true"
-        />
-      )}
+      <div 
+        className={`lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm transition-all duration-300 ${
+          isMenuOpen ? 'opacity-100 visible z-[60]' : 'opacity-0 invisible pointer-events-none'
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+        aria-hidden="true"
+      />
 
       {/* Mobile Menu */}
       <div 
-        className={`lg:hidden fixed inset-x-0 bottom-0 bg-[#0a0a0f] backdrop-blur-2xl transition-all duration-300 ease-out z-40 ${
-          isScrolled ? 'top-[82px]' : 'top-[82px] sm:top-[96px]'
-        } ${
-          isMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4 pointer-events-none'
+        className={`lg:hidden fixed inset-x-0 top-0 bottom-0 bg-[#0a0a0f] transition-all duration-300 ease-out z-[70] ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
+        {/* Close button */}
+        <div className="flex items-center justify-between h-20 px-4 sm:px-6 border-b border-white/10">
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>
+            <img 
+              src={logo} 
+              alt="Light Way Homes" 
+              className="h-10 md:h-12"
+            />
+          </Link>
+          <button
+            className="p-3 rounded-xl hover:bg-white/10 transition-colors touch-manipulation"
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <div className="relative w-6 h-5">
+              <span className="absolute left-0 top-2.5 w-6 h-[2px] bg-secondary rounded-full rotate-45" />
+              <span className="absolute left-0 top-2.5 w-6 h-[2px] bg-secondary rounded-full -rotate-45" />
+            </div>
+          </button>
+        </div>
+
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/5 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 top-20 bg-gradient-to-b from-secondary/5 to-transparent pointer-events-none" />
         
-        <nav className="h-full overflow-y-auto overscroll-contain -webkit-overflow-scrolling-touch">
-          <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 flex flex-col min-h-full">
-            <div className="space-y-0.5">
+        <nav className="h-[calc(100%-80px)] overflow-y-auto overscroll-contain">
+          <div className="container mx-auto px-4 sm:px-6 py-6 flex flex-col min-h-full">
+            <div className="space-y-1">
               {navLinks.map((link, index) => (
                 <div 
                   key={link.name}
                   className={`transition-all duration-300 ease-out ${
-                    isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'
+                    isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
                   }`}
-                  style={{ transitionDelay: isMenuOpen ? `${index * 40 + 50}ms` : '0ms' }}
+                  style={{ transitionDelay: isMenuOpen ? `${index * 50 + 100}ms` : '0ms' }}
                 >
                   {link.subLinks ? (
-                    <div className="border-b border-white/5">
+                    <div className="border-b border-white/10">
                       <button
                         onClick={() => setMobileSubmenu(mobileSubmenu === link.name ? null : link.name)}
-                        className="flex items-center justify-between w-full py-3.5 sm:py-4 text-[15px] sm:text-base font-medium text-white hover:text-secondary transition-colors touch-manipulation"
+                        className="flex items-center justify-between w-full py-4 text-base font-medium text-white hover:text-secondary transition-colors touch-manipulation"
                       >
                         <span>{link.name}</span>
                         <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${
@@ -440,24 +459,24 @@ const Header = () => {
                       </button>
                       
                       <div className={`grid transition-all duration-300 ease-out ${
-                        mobileSubmenu === link.name ? 'grid-rows-[1fr] opacity-100 pb-2' : 'grid-rows-[0fr] opacity-0'
+                        mobileSubmenu === link.name ? 'grid-rows-[1fr] opacity-100 pb-3' : 'grid-rows-[0fr] opacity-0'
                       }`}>
                         <div className="overflow-hidden">
-                          <div className="space-y-0.5 pl-1">
+                          <div className="space-y-1 pl-2">
                             {link.subLinks.map((subLink) => (
                               <Link
                                 key={subLink.name}
                                 to={subLink.href}
                                 onClick={() => handleNavClick(subLink.href, true)}
-                                className="flex items-center gap-3 py-2.5 sm:py-3 px-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors touch-manipulation active:bg-white/10"
+                                className="flex items-center gap-3 py-3 px-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors touch-manipulation active:bg-white/10"
                               >
-                                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-secondary/15 to-primary/15 flex items-center justify-center border border-white/5 flex-shrink-0">
-                                  <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-secondary" />
+                                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center border border-white/10 flex-shrink-0">
+                                  <ArrowRight className="w-3.5 h-3.5 text-secondary" />
                                 </div>
                                 <div className="flex flex-col">
-                                  <span className="text-sm sm:text-[15px] font-medium">{subLink.name}</span>
+                                  <span className="text-[15px] font-medium">{subLink.name}</span>
                                   {subLink.description && (
-                                    <span className="text-xs text-white/40 hidden sm:block">{subLink.description}</span>
+                                    <span className="text-xs text-white/40">{subLink.description}</span>
                                   )}
                                 </div>
                               </Link>
@@ -470,7 +489,7 @@ const Header = () => {
                     <Link
                       to={link.href}
                       onClick={() => handleNavClick(link.href, link.isRoute)}
-                      className={`block py-3.5 sm:py-4 text-[15px] sm:text-base font-medium border-b border-white/5 transition-colors touch-manipulation active:bg-white/5 ${
+                      className={`block py-4 text-base font-medium border-b border-white/10 transition-colors touch-manipulation active:bg-white/5 ${
                         isActiveRoute(link.href) ? 'text-secondary' : 'text-white hover:text-secondary'
                       }`}
                     >
@@ -483,27 +502,27 @@ const Header = () => {
             
             {/* Mobile CTA Section */}
             <div 
-              className={`mt-auto pt-4 sm:pt-6 border-t border-white/5 transition-all duration-300 ${
+              className={`mt-auto pt-6 border-t border-white/10 transition-all duration-300 ${
                 isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
-              style={{ transitionDelay: isMenuOpen ? '300ms' : '0ms' }}
+              style={{ transitionDelay: isMenuOpen ? '350ms' : '0ms' }}
             >
               <a 
                 href="tel:+2348038034077" 
-                className="flex items-center gap-3 sm:gap-4 py-3 sm:py-4 text-white/70 hover:text-white transition-colors touch-manipulation active:bg-white/5 rounded-lg"
+                className="flex items-center gap-4 py-4 text-white/70 hover:text-white transition-colors touch-manipulation active:bg-white/5 rounded-lg"
               >
-                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 flex-shrink-0">
-                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-secondary" />
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 flex-shrink-0">
+                  <Phone className="w-5 h-5 text-secondary" />
                 </div>
                 <div>
-                  <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider">Call us now</span>
-                  <span className="block font-semibold text-white text-sm sm:text-base mt-0.5">+234 803 803 4077</span>
+                  <span className="text-xs text-white/40 uppercase tracking-wider">Call us now</span>
+                  <span className="block font-semibold text-white text-base mt-0.5">+234 803 803 4077</span>
                 </div>
               </a>
               <Button 
                 variant="default" 
                 size="lg" 
-                className="w-full mt-3 sm:mt-4 bg-gradient-to-r from-secondary to-primary border-0 shadow-lg shadow-secondary/20 font-semibold text-sm uppercase tracking-wide h-11 sm:h-12 touch-manipulation"
+                className="w-full mt-4 bg-gradient-to-r from-secondary to-primary border-0 shadow-lg shadow-secondary/20 font-semibold text-sm uppercase tracking-wide h-12 touch-manipulation"
               >
                 Get Started
               </Button>
