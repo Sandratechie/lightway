@@ -29,6 +29,7 @@ const Header = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const highlightRef = useRef<HTMLDivElement>(null);
+  const closeDropdownTimerRef = useRef<number | null>(null);
   const location = useLocation();
 
   // Initial load animation
@@ -89,12 +90,12 @@ const Header = () => {
   const moveHighlight = (index: number) => {
     const navItems = navRef.current?.querySelectorAll('.nav-item');
     const highlight = highlightRef.current;
-    
+
     if (navItems && highlight && navItems[index]) {
       const item = navItems[index] as HTMLElement;
       const rect = item.getBoundingClientRect();
       const navRect = navRef.current!.getBoundingClientRect();
-      
+
       highlight.style.width = `${rect.width}px`;
       highlight.style.left = `${rect.left - navRect.left}px`;
       highlight.style.opacity = '1';
@@ -105,6 +106,22 @@ const Header = () => {
     if (highlightRef.current) {
       highlightRef.current.style.opacity = '0';
     }
+  };
+
+  const openDropdown = (name: string) => {
+    if (closeDropdownTimerRef.current) {
+      window.clearTimeout(closeDropdownTimerRef.current);
+      closeDropdownTimerRef.current = null;
+    }
+    setActiveDropdown(name);
+  };
+
+  const closeDropdown = (delayMs = 260) => {
+    if (closeDropdownTimerRef.current) window.clearTimeout(closeDropdownTimerRef.current);
+    closeDropdownTimerRef.current = window.setTimeout(() => {
+      setActiveDropdown(null);
+      resetHighlight();
+    }, delayMs);
   };
 
   const navLinks: NavItem[] = [
@@ -203,14 +220,7 @@ const Header = () => {
                 style={{ transform: 'translateY(-50%)' }}
               />
               
-              <div
-                className="flex items-center"
-                ref={dropdownRef}
-                onMouseLeave={() => {
-                  setActiveDropdown(null);
-                  resetHighlight();
-                }}
-              >
+              <div className="flex items-center" ref={dropdownRef}>
                 {navLinks.map((link, index) => (
                   <div 
                     key={link.name}
@@ -218,7 +228,11 @@ const Header = () => {
                     onMouseEnter={() => {
                       moveHighlight(index);
                       setActiveIndex(index);
-                      if (link.subLinks) setActiveDropdown(link.name);
+                      if (link.subLinks) openDropdown(link.name);
+                    }}
+                    onMouseLeave={() => {
+                      if (link.subLinks) closeDropdown();
+                      else resetHighlight();
                     }}
                   >
                     {link.subLinks ? (
@@ -226,7 +240,7 @@ const Header = () => {
                         <button
                           type="button"
                           onClick={() =>
-                            setActiveDropdown((prev) => (prev === link.name ? null : link.name))
+                            activeDropdown === link.name ? closeDropdown(0) : openDropdown(link.name)
                           }
                           aria-expanded={activeDropdown === link.name}
                           className={`relative px-5 py-3 text-[13px] font-medium tracking-wide uppercase transition-all duration-300 flex items-center gap-1.5 cursor-pointer select-none touch-manipulation ${
@@ -250,7 +264,9 @@ const Header = () => {
                         
                         {/* Premium Dropdown Menu */}
                         <div 
-                          className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-300 ease-out ${
+                          onMouseEnter={() => openDropdown(link.name)}
+                          onMouseLeave={() => closeDropdown()}
+                          className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50 transition-all duration-300 ease-out ${
                             activeDropdown === link.name 
                               ? 'opacity-100 visible' 
                               : 'opacity-0 invisible'
