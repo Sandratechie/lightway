@@ -20,7 +20,9 @@ interface NavItem {
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  // Keep header content visible immediately; some mobile browsers can delay/skip
+  // the initial animation timeout, making the navbar appear empty.
+  const [isVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [hideNav, setHideNav] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -32,11 +34,7 @@ const Header = () => {
   const closeDropdownTimerRef = useRef<number | null>(null);
   const location = useLocation();
 
-  // Initial load animation
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+  // (Removed initial load opacity/translate animation to guarantee navbar visibility on mobile.)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -182,7 +180,7 @@ const Header = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
         hideNav ? '-translate-y-full' : 'translate-y-0'
-      } ${isVisible ? 'opacity-100' : 'opacity-0 -translate-y-4'}`}
+      } opacity-100`}
     >
       {/* Premium glass navbar container */}
       <div className={`transition-all duration-500 ${
@@ -198,9 +196,7 @@ const Header = () => {
             {/* Logo */}
             <Link 
               to="/" 
-              className={`flex items-center group transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-              }`}
+              className="flex items-center group transition-all duration-700"
             >
               <div className="relative">
                 <img 
@@ -341,9 +337,7 @@ const Header = () => {
 
             {/* CTA & Phone */}
             <div 
-              className={`hidden lg:flex items-center gap-5 transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-              }`}
+              className="hidden lg:flex items-center gap-5 transition-all duration-700 opacity-100 translate-x-0"
               style={{ transitionDelay: '400ms' }}
             >
               <a 
@@ -381,9 +375,7 @@ const Header = () => {
 
             {/* Mobile Menu Toggle */}
             <button
-              className={`lg:hidden p-2 sm:p-3 rounded-xl transition-all duration-300 text-white ${
-                isVisible ? 'opacity-100' : 'opacity-0'
-              } hover:bg-white/[0.06] active:scale-95 touch-manipulation`}
+              className="lg:hidden p-2 sm:p-3 rounded-xl transition-all duration-300 text-white opacity-100 hover:bg-white/[0.06] active:scale-95 touch-manipulation"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
