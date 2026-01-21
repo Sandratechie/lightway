@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Phone } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CountUpNumber from "@/components/CountUpNumber";
 
@@ -75,19 +75,6 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-secondary/10 mix-blend-overlay" />
       </div>
 
-      {/* Video Navigation Arrows */}
-      <button
-        onClick={handlePrevVideo}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 md:p-4 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 group hover:scale-105"
-      >
-        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 group-hover:-translate-x-0.5 transition-transform" />
-      </button>
-      <button
-        onClick={handleNextVideo}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-3 md:p-4 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 group hover:scale-105"
-      >
-        <ChevronRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-0.5 transition-transform" />
-      </button>
 
       {/* Video Indicators */}
       <div className="absolute bottom-24 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
