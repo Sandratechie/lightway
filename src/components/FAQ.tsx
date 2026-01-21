@@ -69,14 +69,14 @@ const faqData = [
 
 const FAQ = () => {
   return (
-    <section className="section-padding bg-muted/30">
-      <div className="container mx-auto container-padding">
+    <section className="section-padding bg-background relative overflow-hidden">
+      <div className="container mx-auto container-padding relative z-10">
         <AnimatedSection animation="fade-up" className="text-center mb-12">
-          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
             Got Questions?
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Frequently Asked Questions
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
+            Frequently Asked <span className="text-secondary">Questions</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Find answers to common questions about our properties, payment plans, and services.
@@ -89,9 +89,9 @@ const FAQ = () => {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-background border border-border rounded-lg px-5 overflow-hidden"
+                className="bg-card border border-border rounded-lg px-5 overflow-hidden shadow-sm hover:shadow-card transition-all duration-300 data-[state=open]:border-primary/50"
               >
-                <AccordionTrigger className="text-left text-sm md:text-base font-semibold py-4 hover:text-primary hover:no-underline [&[data-state=open]]:text-primary">
+                <AccordionTrigger className="text-left text-sm md:text-base font-semibold py-4 hover:text-primary hover:no-underline [&[data-state=open]]:text-primary transition-colors">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground text-sm md:text-base pb-4">

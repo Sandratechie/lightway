@@ -68,7 +68,7 @@ const coreValues = [
 
 const teamMembers = [
   {
-    name: "Funmilola Adesanya",
+    name: "Funmilayo Adesanya",
     role: "MD/CEO",
     image: funmilayoImg,
     description:
@@ -76,7 +76,7 @@ const teamMembers = [
   },
   {
     name: "Olumide Olujuyigbe",
-    role: "Director",
+    role: "Chartered Architect",
     image: olumideImg,
     description:
       "Bringing architectural excellence and innovative designs to every project.",
