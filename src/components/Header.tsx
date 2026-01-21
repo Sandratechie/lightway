@@ -42,6 +42,14 @@ const Header = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 30);
+
+      // Keep navbar always visible on mobile/tablet to avoid it feeling "missing"
+      // due to small scroll gestures.
+      if (window.innerWidth < 1024) {
+        setHideNav(false);
+        setLastScrollY(currentScrollY);
+        return;
+      }
       
       if (currentScrollY > lastScrollY && currentScrollY > 200) {
         setHideNav(true);
