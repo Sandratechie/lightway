@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, ChevronDown, ArrowRight } from "lucide-react";
+import { Phone, ChevronDown, ArrowRight, Mail, Youtube, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 
@@ -411,33 +411,79 @@ const Header = () => {
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {/* Close button */}
-        <div className="flex items-center justify-between h-20 px-4 sm:px-6 border-b border-white/10">
+        {/* Mobile Header with Logo & Close */}
+        <div className="flex items-center justify-between h-16 sm:h-20 px-4 sm:px-6 border-b border-white/10">
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
             <img 
               src={logo} 
               alt="Light Way Homes" 
-              className="h-10 md:h-12"
+              className="h-8 sm:h-10 md:h-12"
             />
           </Link>
           <button
-            className="p-3 rounded-xl hover:bg-white/10 transition-colors touch-manipulation"
+            className="p-2 sm:p-3 rounded-xl hover:bg-white/10 transition-colors touch-manipulation"
             onClick={() => setIsMenuOpen(false)}
             aria-label="Close menu"
           >
-            <div className="relative w-6 h-5">
-              <span className="absolute left-0 top-2.5 w-6 h-[2px] bg-secondary rounded-full rotate-45" />
-              <span className="absolute left-0 top-2.5 w-6 h-[2px] bg-secondary rounded-full -rotate-45" />
+            <div className="relative w-5 sm:w-6 h-4 sm:h-5">
+              <span className="absolute left-0 top-2 sm:top-2.5 w-5 sm:w-6 h-[2px] bg-secondary rounded-full rotate-45" />
+              <span className="absolute left-0 top-2 sm:top-2.5 w-5 sm:w-6 h-[2px] bg-secondary rounded-full -rotate-45" />
             </div>
           </button>
         </div>
 
+        {/* Quick Contact & Social Bar */}
+        <div className="px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-secondary/10 to-primary/10 border-b border-white/10">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            {/* Phone Numbers */}
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <a 
+                href="tel:+2348038034077" 
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full bg-secondary/20 text-secondary text-xs sm:text-sm font-medium hover:bg-secondary/30 transition-colors touch-manipulation"
+              >
+                <Phone className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                <span className="hidden xs:inline">+234 803 803 4077</span>
+                <span className="xs:hidden">Call</span>
+              </a>
+              <a 
+                href="tel:+2348075161213" 
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full bg-white/5 text-white/70 text-xs sm:text-sm font-medium hover:bg-white/10 transition-colors touch-manipulation"
+              >
+                <Phone className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                <span className="hidden sm:inline">+234 807 516 1213</span>
+                <span className="sm:hidden">Alt</span>
+              </a>
+            </div>
+            
+            {/* Social Links */}
+            <div className="flex items-center gap-2">
+              <a 
+                href="mailto:info@lightwayhomesltd.com" 
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-white/10 hover:text-white transition-all touch-manipulation"
+                aria-label="Email us"
+              >
+                <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com/channel/UC_u0r-r75fcTwkZagHkyS6g" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-red-500/20 hover:text-red-500 transition-all touch-manipulation"
+                aria-label="YouTube Channel"
+              >
+                <Youtube className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* Gradient overlay */}
-        <div className="absolute inset-0 top-20 bg-gradient-to-b from-secondary/5 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 top-32 sm:top-36 bg-gradient-to-b from-secondary/5 to-transparent pointer-events-none" />
         
-        <nav className="h-[calc(100%-80px)] overflow-y-auto overscroll-contain">
-          <div className="container mx-auto px-4 sm:px-6 py-6 flex flex-col min-h-full">
-            <div className="space-y-1">
+        <nav className="h-[calc(100%-128px)] sm:h-[calc(100%-144px)] overflow-y-auto overscroll-contain">
+          <div className="px-4 sm:px-6 py-4 sm:py-6 flex flex-col min-h-full">
+            {/* Navigation Links - Card Style for Mobile */}
+            <div className="grid gap-2 sm:gap-3">
               {navLinks.map((link, index) => (
                 <div 
                   key={link.name}
@@ -447,36 +493,36 @@ const Header = () => {
                   style={{ transitionDelay: isMenuOpen ? `${index * 50 + 100}ms` : '0ms' }}
                 >
                   {link.subLinks ? (
-                    <div className="border-b border-white/10">
+                    <div className="bg-white/[0.02] rounded-xl border border-white/5 overflow-hidden">
                       <button
                         onClick={() => setMobileSubmenu(mobileSubmenu === link.name ? null : link.name)}
-                        className="flex items-center justify-between w-full py-4 text-base font-medium text-white hover:text-secondary transition-colors touch-manipulation"
+                        className="flex items-center justify-between w-full px-4 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-white hover:bg-white/5 transition-colors touch-manipulation"
                       >
                         <span>{link.name}</span>
-                        <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${
-                          mobileSubmenu === link.name ? 'rotate-180 text-secondary' : 'text-white/50'
+                        <ChevronDown className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 ${
+                          mobileSubmenu === link.name ? 'rotate-180 text-secondary' : 'text-white/40'
                         }`} />
                       </button>
                       
                       <div className={`grid transition-all duration-300 ease-out ${
-                        mobileSubmenu === link.name ? 'grid-rows-[1fr] opacity-100 pb-3' : 'grid-rows-[0fr] opacity-0'
+                        mobileSubmenu === link.name ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                       }`}>
                         <div className="overflow-hidden">
-                          <div className="space-y-1 pl-2">
+                          <div className="px-2 pb-2 space-y-1">
                             {link.subLinks.map((subLink) => (
                               <Link
                                 key={subLink.name}
                                 to={subLink.href}
                                 onClick={() => handleNavClick(subLink.href, true)}
-                                className="flex items-center gap-3 py-3 px-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors touch-manipulation active:bg-white/10"
+                                className="flex items-center gap-3 py-2.5 sm:py-3 px-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors touch-manipulation active:bg-white/10"
                               >
-                                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center border border-white/10 flex-shrink-0">
-                                  <ArrowRight className="w-3.5 h-3.5 text-secondary" />
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center border border-white/10 flex-shrink-0">
+                                  <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-secondary" />
                                 </div>
-                                <div className="flex flex-col">
-                                  <span className="text-[15px] font-medium">{subLink.name}</span>
+                                <div className="flex flex-col min-w-0">
+                                  <span className="text-sm sm:text-[15px] font-medium truncate">{subLink.name}</span>
                                   {subLink.description && (
-                                    <span className="text-xs text-white/40">{subLink.description}</span>
+                                    <span className="text-[10px] sm:text-xs text-white/40 truncate">{subLink.description}</span>
                                   )}
                                 </div>
                               </Link>
@@ -489,42 +535,51 @@ const Header = () => {
                     <Link
                       to={link.href}
                       onClick={() => handleNavClick(link.href, link.isRoute)}
-                      className={`block py-4 text-base font-medium border-b border-white/10 transition-colors touch-manipulation active:bg-white/5 ${
-                        isActiveRoute(link.href) ? 'text-secondary' : 'text-white hover:text-secondary'
+                      className={`flex items-center justify-between px-4 py-3.5 sm:py-4 text-sm sm:text-base font-semibold rounded-xl border transition-colors touch-manipulation active:scale-[0.98] ${
+                        isActiveRoute(link.href) 
+                          ? 'text-secondary bg-secondary/10 border-secondary/30' 
+                          : 'text-white bg-white/[0.02] border-white/5 hover:bg-white/5 hover:border-white/10'
                       }`}
                     >
-                      {link.name}
+                      <span>{link.name}</span>
+                      {isActiveRoute(link.href) && (
+                        <div className="w-2 h-2 rounded-full bg-secondary" />
+                      )}
                     </Link>
                   )}
                 </div>
               ))}
             </div>
             
-            {/* Mobile CTA Section */}
+            {/* Mobile Footer CTA Section */}
             <div 
-              className={`mt-auto pt-6 border-t border-white/10 transition-all duration-300 ${
+              className={`mt-auto pt-4 sm:pt-6 transition-all duration-300 ${
                 isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
               style={{ transitionDelay: isMenuOpen ? '350ms' : '0ms' }}
             >
-              <a 
-                href="tel:+2348038034077" 
-                className="flex items-center gap-4 py-4 text-white/70 hover:text-white transition-colors touch-manipulation active:bg-white/5 rounded-lg"
-              >
-                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 flex-shrink-0">
-                  <Phone className="w-5 h-5 text-secondary" />
+              {/* Location Info */}
+              <div className="flex items-start gap-3 p-3 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5 mb-3 sm:mb-4">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                 </div>
-                <div>
-                  <span className="text-xs text-white/40 uppercase tracking-wider">Call us now</span>
-                  <span className="block font-semibold text-white text-base mt-0.5">+234 803 803 4077</span>
+                <div className="min-w-0">
+                  <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider">Visit Us</span>
+                  <p className="text-xs sm:text-sm text-white/70 mt-0.5 leading-relaxed">
+                    No. 4, Oyewo Close, Clay Busstop, Juli Estate, Oregun, Ikeja Lagos
+                  </p>
                 </div>
-              </a>
+              </div>
+
               <Button 
                 variant="default" 
                 size="lg" 
-                className="w-full mt-4 bg-gradient-to-r from-secondary to-primary border-0 shadow-lg shadow-secondary/20 font-semibold text-sm uppercase tracking-wide h-12 touch-manipulation"
+                className="w-full bg-gradient-to-r from-secondary to-primary border-0 shadow-lg shadow-secondary/20 font-semibold text-xs sm:text-sm uppercase tracking-wide h-11 sm:h-12 touch-manipulation"
+                asChild
               >
-                Get Started
+                <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
+                  Get Started
+                </Link>
               </Button>
             </div>
           </div>
