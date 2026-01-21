@@ -399,7 +399,7 @@ const Header = () => {
       {/* Mobile Menu Overlay */}
       <div 
         className={`lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm transition-all duration-300 ${
-          isMenuOpen ? 'opacity-100 visible z-[60]' : 'opacity-0 invisible pointer-events-none'
+          isMenuOpen ? 'opacity-100 visible z-[9998]' : 'opacity-0 invisible pointer-events-none'
         }`}
         onClick={() => setIsMenuOpen(false)}
         aria-hidden="true"
@@ -407,7 +407,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div 
-        className={`lg:hidden fixed inset-x-0 top-0 bottom-0 bg-[#0a0a0f] transition-all duration-300 ease-out z-[70] ${
+        className={`lg:hidden fixed inset-x-0 top-0 bottom-0 bg-[#0a0a0f] transition-all duration-300 ease-out z-[9999] ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
